@@ -4,5 +4,5 @@
 
 [node name="SceneOne" type="Node2D"]
 
-[node name="Area2D" parent="." instance=ExtResource( 1 )]
-position = Vector2( 218, 128 )
+[node name="Cat" parent="." instance=ExtResource( 1 )]
+position = Vector2( 218, 143 )
