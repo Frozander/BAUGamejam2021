@@ -2,11 +2,13 @@ extends Area2D
 
 export var speed = 1
 export var run_multiplier = 2
+
 var movement_vector = Vector2(0, 0)
+var is_meowing = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	pass
 
 func _physics_process(_delta):
 	movement_vector = Vector2(0, 0)
@@ -15,10 +17,12 @@ func _physics_process(_delta):
 	if Input.is_action_pressed("ui_left"): movement_vector += Vector2.LEFT
 	if Input.is_action_pressed("ui_right"): movement_vector += Vector2.RIGHT
 	
-	if Input.is_action_pressed("ui_select"):
-		$Particles2D.emitting = true
-	else:
-		$Particles2D.emitting = false
+	if Input.is_action_just_pressed("ui_select") && !is_meowing:
+		is_meowing = true
+		$AudioStreamPlayer.play()
+#		$Particles2D.emitting = true
+#	else:
+#		$Particles2D.emitting = false
 		
 	if movement_vector.x == -1:
 		$AnimatedSprite.flip_h = false
@@ -29,7 +33,7 @@ func _physics_process(_delta):
 		if sign($Particles2D.position.x) == -1:
 			$Particles2D.position.x *= -1
 	
-	var mov = movement_vector.normalized() * speed
+	var mov = movement_vector.normalized() * speed 
 	
 	if mov == Vector2.ZERO:
 		$AnimatedSprite.play('idle')
@@ -39,5 +43,8 @@ func _physics_process(_delta):
 	elif movement_vector != Vector2.ZERO:
 		$AnimatedSprite.play('walk')
 	
-	
 	self.position += mov
+
+
+func _on_AudioStreamPlayer_finished():
+	is_meowing = false
