@@ -39,6 +39,20 @@ corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 corner_detail = 6
 
+[sub_resource type="GDScript" id=5]
+script/source = "extends Button
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	var path = \"res://Fonts/IndieFlower-Regular.ttf\" 
+	var new_font = DynamicFont.new()
+	var new_data = DynamicFontData.new()
+	new_data.font_path = path
+	new_font.font_data = new_data
+	new_font.size = 10
+	set(\"custom_fonts/font\", new_font)
+"
+
 [node name="DayEnd" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -111,6 +125,33 @@ margin_bottom = 15.0
 custom_styles/fg = SubResource( 3 )
 custom_styles/bg = SubResource( 4 )
 percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ContinueButton" type="Button" parent="Control"]
+anchor_left = 0.5
+anchor_top = 0.95
+anchor_right = 0.9
+anchor_bottom = 0.95
+margin_left = 20.0
+margin_top = 0.445435
+margin_bottom = 20.4454
+text = "Next Day >"
+script = SubResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MainMenuButton" type="Button" parent="Control"]
+anchor_left = 0.1
+anchor_top = 0.95
+anchor_right = 0.5
+anchor_bottom = 0.95
+margin_right = -20.0
+margin_bottom = 20.0
+text = "Main Menu"
+script = SubResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
