@@ -30,7 +30,7 @@ window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray(  )
+enabled=PoolStringArray( "godot-git-control.funabab" )
 
 [importer_defaults]
 
