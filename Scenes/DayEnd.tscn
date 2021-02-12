@@ -135,4 +135,6 @@ margin_left = 216.245
 margin_top = 156.554
 margin_right = 321.245
 margin_bottom = 182.554
+load_scene_on_click = false
+scene_to_load = ""
 label = "Next Day >"
