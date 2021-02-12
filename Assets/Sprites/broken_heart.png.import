@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/heart pixel art 16x16.png-2a5ca9682ce0bfeeee045b3cc77e8e57.stex"
+path="res://.import/broken_heart.png-c0564a7868fddfd5ea67478dc39e121f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Cat/heart pixel art 16x16.png"
-dest_files=[ "res://.import/heart pixel art 16x16.png-2a5ca9682ce0bfeeee045b3cc77e8e57.stex" ]
+source_file="res://Assets/Sprites/broken_heart.png"
+dest_files=[ "res://.import/broken_heart.png-c0564a7868fddfd5ea67478dc39e121f.stex" ]
 
 [params]
 
