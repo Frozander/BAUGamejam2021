@@ -1,0 +1,162 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Fonts/IndieFlower-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Scenes/DayEnd.gd" type="Script" id=2]
+[ext_resource path="res://Photos/image.jpg" type="Texture" id=3]
+
+[sub_resource type="GDScript" id=3]
+script/source = "extends Control
+
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass
+"
+
+[sub_resource type="DynamicFont" id=1]
+size = 12
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.784314, 0.196078, 0.196078, 1 )
+border_color = Color( 0.784314, 0.196078, 0.196078, 1 )
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+corner_detail = 6
+
+[sub_resource type="GDScript" id=4]
+script/source = "extends Button
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	var path = \"res://Fonts/IndieFlower-Regular.ttf\" 
+	var new_font = DynamicFont.new()
+	var new_data = DynamicFontData.new()
+	new_data.font_path = path
+	new_font.font_data = new_data
+	new_font.size = 10
+	set(\"custom_fonts/font\", new_font)
+"
+
+[node name="DayEnd" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 40.0
+margin_top = 30.4719
+margin_right = -40.0
+margin_bottom = -39.5281
+script = SubResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DayCompletedLabel" type="Label" parent="Control"]
+anchor_right = 1.0
+margin_bottom = 24.0
+rect_pivot_offset = Vector2( -82.3224, 67.991 )
+custom_fonts/font = SubResource( 1 )
+text = "Day Completed"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PercentageLabel" type="Label" parent="Control"]
+anchor_right = 0.5
+margin_left = 26.0
+margin_top = 61.0
+margin_right = -16.0
+margin_bottom = 86.0
+rect_pivot_offset = Vector2( -82.3224, 67.991 )
+custom_fonts/font = SubResource( 1 )
+text = "00% Completed"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PhotoTakenLabel" type="Label" parent="Control"]
+anchor_left = 0.55
+anchor_top = 0.8
+anchor_right = 0.6
+anchor_bottom = 0.8
+margin_left = -3.35718
+margin_top = -7.93698
+margin_right = 136.343
+margin_bottom = 10.063
+rect_rotation = -5.0
+rect_pivot_offset = Vector2( -82.3224, 67.991 )
+custom_fonts/font = SubResource( 1 )
+text = "You Have Taken Photo Of Day"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ProgressBar" type="ProgressBar" parent="Control"]
+anchor_top = 0.5
+anchor_right = 0.4
+anchor_bottom = 0.5
+margin_left = 30.0
+margin_top = 0.471939
+margin_right = 30.0
+margin_bottom = 15.0
+custom_styles/fg = SubResource( 5 )
+custom_styles/bg = SubResource( 6 )
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ContinueButton" type="Button" parent="Control"]
+anchor_left = 0.5
+anchor_top = 0.95
+anchor_right = 0.9
+anchor_bottom = 0.95
+margin_left = 20.0
+margin_top = 0.445435
+margin_bottom = 20.4454
+text = "Next Day >"
+script = SubResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MainMenuButton" type="Button" parent="Control"]
+anchor_left = 0.1
+anchor_top = 0.95
+anchor_right = 0.5
+anchor_bottom = 0.95
+margin_right = -20.0
+margin_bottom = 20.0
+text = "Main Menu"
+script = SubResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="image" type="Sprite" parent="Control"]
+position = Vector2( 254.832, 82.069 )
+rotation = -0.0872665
+scale = Vector2( 0.03, 0.03 )
+texture = ExtResource( 3 )
