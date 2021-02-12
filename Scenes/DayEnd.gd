@@ -1,13 +1,11 @@
 extends Control
 
-signal continue_pressed
-signal main_menu_pressed
+func _on_MainMenuButton_pressed():
+	get_tree().change_scene("res://Scenes/TitleScreen.tscn")
 
-func _ready():
-	set_progress_percentage(75)
-	$Control/ContinueButton.connect("pressed", self, "on_continue")
-	$Control/MainMenuButton.connect("pressed", self, "on_main_menu")
-	
+func _on_ContinueButton_pressed():
+	get_tree().change_scene("res://Scenes/SceneOne.tscn")
+
 func set_progress_percentage(score):
 	if score <= 1:
 		score *= 100
@@ -43,3 +41,4 @@ func resize_progress_to_max_width():
 func resize_progress_to_normal_with():
 	$Control/ProgressBar.anchor_right = .4
 	$Control/ProgressBar.margin_right = 30
+
