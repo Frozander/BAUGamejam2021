@@ -24,5 +24,6 @@ gravity = Vector3( 0, 0, 0 )
 initial_velocity = 50.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
+scale = 0.4
 scale_curve = SubResource( 4 )
 color_ramp = SubResource( 2 )
