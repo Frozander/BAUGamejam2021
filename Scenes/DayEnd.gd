@@ -4,7 +4,7 @@ signal continue_pressed
 signal main_menu_pressed
 
 func _ready():
-	set_progress_percentage(100)
+	set_progress_percentage(75)
 	$Control/ContinueButton.connect("pressed", self, "on_continue")
 	$Control/MainMenuButton.connect("pressed", self, "on_main_menu")
 	
@@ -24,13 +24,9 @@ func set_progress_percentage(score):
 	
 func on_continue():
 	emit_signal("continue_pressed")
-	print("continue pressed")
-	set_progress_percentage(100)
 
 func on_main_menu():
 	emit_signal("main_menu_pressed")
-	print("main menu pressed")
-	set_progress_percentage(70)
 
 func hide_photo_taken():
 	$Control/image.hide()
