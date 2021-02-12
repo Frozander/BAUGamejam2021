@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/meow.wav-65efc4b7508bcb19256ed355f8bdc9ba.sample"
+path="res://.import/Meow.wav-1a73740bb6495ffcd784ab7dcc35bf74.sample"
 
 [deps]
 
-source_file="res://Assets/Sounds/meow.wav"
-dest_files=[ "res://.import/meow.wav-65efc4b7508bcb19256ed355f8bdc9ba.sample" ]
+source_file="res://Assets/Sounds/Meow.wav"
+dest_files=[ "res://.import/Meow.wav-1a73740bb6495ffcd784ab7dcc35bf74.sample" ]
 
 [params]
 
