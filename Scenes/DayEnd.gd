@@ -6,6 +6,9 @@ func _on_MainMenuButton_pressed():
 func _on_ContinueButton_pressed():
 	get_tree().change_scene("res://Scenes/SceneOne.tscn")
 
+func _ready():
+	set_progress_percentage(75)
+
 func set_progress_percentage(score):
 	if score <= 1:
 		score *= 100
@@ -19,12 +22,6 @@ func set_progress_percentage(score):
 	else:
 		hide_photo_taken()
 		resize_progress_to_max_width()
-	
-func on_continue():
-	emit_signal("continue_pressed")
-
-func on_main_menu():
-	emit_signal("main_menu_pressed")
 
 func hide_photo_taken():
 	$Control/image.hide()
