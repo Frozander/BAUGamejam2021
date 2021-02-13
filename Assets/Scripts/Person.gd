@@ -167,7 +167,6 @@ func _on_Person_area_entered(area):
 
 
 func _on_PetZone_area_entered(area):
-	print(area.name)
 	if is_waiting_cat && area.name == "CatPetZone":
 		pet_cat()
 		

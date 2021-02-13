@@ -2,7 +2,7 @@ extends Node2D
 
 const ZONE_X = 210 #width of move zone
 const ZONE_Y = 40
-const PERSON_COUNT = 1
+const PERSON_COUNT = 3
 const PERSON_HEARING_MEOW_LOWER_LIMIT = 60
 
 const PART_CHANGE_X_GAP = 70
@@ -25,15 +25,8 @@ const BACKGROUNDS = [
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	rng.randomize()
-	for i in 3:
-		people.append([])
-		for p in PERSON_COUNT:
-			var person = PERSON.instance()
-			var rand = random_positon_in_move_zone();
-			person.position.x += rand[0]
-			person.position.y += rand[1]
-			people[i].append(person)
-	change_part(1)
+	reset()
+
 
 func _unhandled_key_input(event):
 	if Input.is_action_pressed("ui_accept"):
@@ -100,3 +93,20 @@ func dist_between_cat_and_person(person):
 func _on_HUD_timeout():
 	Global.current_day += 1
 	get_tree().change_scene("res://Scenes/FadeIn.tscn")
+
+func reset():
+	init_people()
+	current_part = 1
+	change_part(1)
+	
+func init_people():
+	people = []
+	for i in 3:
+		people.append([])
+		for p in PERSON_COUNT:
+			var person = PERSON.instance()
+			var rand = random_positon_in_move_zone();
+			person.position.x += rand[0]
+			person.position.y += rand[1]
+			people[i].append(person)
+
