@@ -2,7 +2,7 @@ extends Node2D
 
 const ZONE_X = 240
 const ZONE_Y = 40
-const PERSON_COUNT = 2
+const PERSON_COUNT = 4
 const PERSON_HEARING_MEOW_LOWER_LIMIT = 75
 
 const PART_CHANGE_X_GAP = 70
