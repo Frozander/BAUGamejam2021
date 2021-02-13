@@ -1,6 +1,7 @@
 extends Area2D
 
 const SPEED_Y_REF = [.25,0,0,0,-.25]
+const PET_DURATION_REF = [5, 7, 9]
 
 var speed_x = .5
 var speed_y = 0
@@ -11,16 +12,25 @@ var is_walking = false
 
 var movment = Vector2()
 
+var is_petted = false
+var is_petting = false
+var pet_duration = 10
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	delta_count = rand_range(-2,2)
+	pet_duration = PET_DURATION_REF[randi() % PET_DURATION_REF.size()]
 	calc_move()
 
 func _process(delta):	
 	delta_count += delta
 	
-	if(delta_count > 3):
+	if is_petting:
+		if delta_count == pet_duration:
+			is_petting = false
+			calc_move()
+	elif(delta_count > 3):
 		calc_move()
 			
 	if is_walking:
@@ -64,7 +74,16 @@ func idle():
 	is_walking = false
 
 func on_hear_meow(cat):
-	print("I can hear cat")
+	if is_petted == false:
+		$AnimatedSprite.play("pet")
+		is_petting = true
+		delta_count = 0
+		is_petted = true
+		is_walking = false
+		if cat.position.x > position.x:
+			direction = 1
+		else:
+			direction = -1
 
 func exclusion_check(area):
 	match area.name:
