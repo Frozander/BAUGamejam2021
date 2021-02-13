@@ -16,6 +16,7 @@ var meow = preload("res://Assets/Sounds/meow.wav")
 var purr = preload("res://Assets/Sounds/purr.wav")
 var angry = preload("res://Assets/Sounds/angry.wav")
 
+var last_played_audio
 var is_petting = false
 
 # Called when the node enters the scene tree for the first time.
@@ -83,6 +84,7 @@ func play_audio(stream = meow):
 		is_playing_audio = true
 		$AudioStreamPlayer.stream = stream
 		$AudioStreamPlayer.play()
+		last_played_audio = stream
 
 func start_petting():
 	is_petting = true
@@ -120,6 +122,9 @@ func exclusion_check(area):
 
 func _on_AudioStreamPlayer_finished():
 	is_playing_audio = false
+	match last_played_audio:
+		purr:
+			Global.pet_meter_current_value += Global.pet_meter_step
 
 func _on_Cat_area_entered(area):
 	pass

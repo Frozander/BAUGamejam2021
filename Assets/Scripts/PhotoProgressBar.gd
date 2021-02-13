@@ -1,10 +1,8 @@
 extends Node2D
 
-export var percentage = 25
-
-func _ready():
-	set_percentage(percentage)
+func _process(delta):
+	var r = Global.pet_meter_current_value/Global.pet_meter_max_value
+	set_percentage(r*100)
 
 func set_percentage(percentage):
-	self.percentage = percentage
 	$ProgressBar.value = percentage

@@ -2,8 +2,12 @@ extends Node
 
 const Cooldown = preload("res://Assets/Scripts/Cooldown.gd")
 
+const DEFAULT_DAY_LENGTH_IN_SECONDS = 120
 var current_day = 1
-var DEFAULT_DAY_LENGTH_IN_SECONDS = 120
+
+var pet_meter_step = 10.0
+var pet_meter_current_value = 0.0
+var pet_meter_max_value = 100.0
 
 var ability_cooldown_map = {
 	"meow": Cooldown.new(3.0),
