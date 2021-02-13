@@ -1,21 +1,20 @@
 extends Node2D
 
+const PERSON = preload("res://Assets/Prefabs/Person.tscn")
+const Cooldown = preload("res://Assets/Scripts/Cooldown.gd")
+
 const ZONE_X = 210 #width of move zone
 const ZONE_Y = 40
 
 const PERSON_COUNT = 3
-
 const PERSON_HEARING_MEOW_LOWER_LIMIT = 60
 
 const PART_CHANGE_X_GAP = 70
 
 var rng = RandomNumberGenerator.new()
-
 var people = []
-
-const PERSON = preload("res://Assets/Prefabs/Person.tscn")
-
 var current_part = 1
+var meow_cooldown:Cooldown = Global.ability_cooldown_map["meow"]
 
 const BACKGROUNDS = [
 	preload("res://Assets/Images/Backgrounds/background_second_floor_pixelart.png"),
@@ -23,14 +22,13 @@ const BACKGROUNDS = [
 	preload("res://Assets/Images/Backgrounds/background_garden_pixelart.png")
 ]
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	rng.randomize()
 	reset()
 
 func _unhandled_key_input(event):
-	if Input.is_action_pressed("meow") and Global.ability_cooldown_map["meow"].is_ready():
+	if Input.is_action_pressed("meow") and meow_cooldown.is_ready():
 		on_cat_meow()
 
 func random_positon_in_move_zone():
