@@ -66,12 +66,6 @@ func _physics_process(_delta):
 		particleState.Sad:
 			$Particles2D.set_texture(broken_heart)
 	
-	# TESTING ONLY
-	if Input.is_action_just_pressed("ui_focus_next"):
-		get_pet()
-	if Input.is_action_just_pressed("ui_home"):
-		get_angry()
-	
 	self.position += mov
 	self.z_index = $CollisionShape2D.position.y
 

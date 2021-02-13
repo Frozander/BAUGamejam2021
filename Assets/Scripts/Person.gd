@@ -63,6 +63,9 @@ func idle():
 	$AnimatedSprite.play("idle")
 	is_walking = false
 
+func on_hear_meow(cat):
+	print("I can hear cat")
+
 func exclusion_check(area):
 	match area.name:
 		"TopExclusion":
