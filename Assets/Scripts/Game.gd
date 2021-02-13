@@ -40,11 +40,11 @@ func random_positon_in_move_zone():
 	var y = rng.randf_range(-ZONE_Y, ZONE_Y)
 	return [x,y]
 
-func change_part (part):
+func change_part(part):
 	if current_part < part:
-		$Cat.position.x = 0
+		$MoveZone/Cat.position.x = 0
 	elif current_part > part:
-		$Cat.position.x = (2 * ZONE_X) - (PART_CHANGE_X_GAP)
+		$MoveZone/Cat.position.x = (2 * ZONE_X) - (PART_CHANGE_X_GAP)
 		
 	if part != current_part:
 		for p in len(people[current_part]):
@@ -58,13 +58,13 @@ func change_part (part):
 	$Backgound.texture = BACKGROUNDS[current_part]
 
 func _on_RightPort_area_entered(area):
-	if area == $Cat:
-		if current_part < len(BACKGROUNDS):
+	if area == $MoveZone/Cat:
+		if current_part < len(BACKGROUNDS) - 1:
 			change_part(current_part + 1)
 		
 
 
 func _on_LeftPort_area_entered(area):
-	if area == $Cat:
+	if area == $MoveZone/Cat:
 		if current_part > 0:
 			change_part(current_part - 1)
