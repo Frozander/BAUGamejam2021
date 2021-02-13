@@ -1,8 +1,5 @@
 extends Control
 
-export(int) var day
-export(int) var percentage
-
 func _on_MainMenuButton_pressed():
 	get_tree().change_scene("res://Scenes/TitleScreen.tscn")
 
@@ -10,8 +7,10 @@ func _on_ContinueButton_pressed():
 	get_tree().change_scene("res://Scenes/SceneOne.tscn")
 
 func _ready():
-	set_progress_percentage(percentage)
-	if percentage == 100:
+	var p = 100*(Global.pet_meter_current_value/Global.pet_meter_max_value)
+	p = min(p,100)
+	set_progress_percentage(p)
+	if p == 100:
 		set_polaroid()
 
 func set_progress_percentage(score):
