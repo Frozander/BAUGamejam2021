@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/image.jpg-a7278bb17f9df3d5ec09560b276b189b.stex"
+path="res://.import/image.jpg-343a84b4d18ca343171875f9b0c150a5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Photos/image.jpg"
-dest_files=[ "res://.import/image.jpg-a7278bb17f9df3d5ec09560b276b189b.stex" ]
+source_file="res://Assets/Images/Polaroids/image.jpg"
+dest_files=[ "res://.import/image.jpg-343a84b4d18ca343171875f9b0c150a5.stex" ]
 
 [params]
 

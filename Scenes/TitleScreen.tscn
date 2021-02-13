@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Assets/Fonts/IndieFlower-Regular.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://Scenes/MenuButton.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/Prefabs/MenuButton.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/FadeIn.tscn" type="PackedScene" id=3]
 
 [sub_resource type="GDScript" id=1]
@@ -58,7 +58,7 @@ margin_right = 263.176
 margin_bottom = 119.27
 rect_pivot_offset = Vector2( 52.5, 13 )
 load_scene_on_click = true
-scene_to_load = "res://Scenes/SceneOne.tscn"
+scene_to_load = "res://Scenes/Game.tscn"
 label = "Start Game"
 
 [node name="PolaroidsButton" parent="." instance=ExtResource( 2 )]
