@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Fonts/IndieFlower-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Assets/Scripts/DayEnd.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Images/Polaroids/image.jpg" type="Texture" id=3]
 [ext_resource path="res://Assets/Prefabs/MenuButton.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Images/polaroid_frame.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Images/polaroid_tape.png" type="Texture" id=6]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Control
@@ -117,12 +119,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="image" type="Sprite" parent="Control"]
-position = Vector2( 254.832, 82.069 )
-rotation = -0.0872665
-scale = Vector2( 0.03, 0.03 )
-texture = ExtResource( 3 )
-
 [node name="MainMenuButton" parent="Control" instance=ExtResource( 4 )]
 margin_left = 41.631
 margin_top = 155.76
@@ -137,4 +133,25 @@ margin_left = 216.245
 margin_top = 156.554
 margin_right = 321.245
 margin_bottom = 182.554
+load_scene_on_click = false
+scene_to_load = ""
 label = "Next Day >"
+
+[node name="image" type="Sprite" parent="Control"]
+position = Vector2( 245.889, 75.3311 )
+rotation = -0.0872665
+scale = Vector2( 0.0170996, 0.0217333 )
+texture = ExtResource( 3 )
+
+[node name="polaroid_frame" type="Sprite" parent="Control/image"]
+position = Vector2( 47.4365, 217.647 )
+rotation = -1.60641e-08
+scale = Vector2( 7.42087, 4.90146 )
+z_index = 10
+texture = ExtResource( 5 )
+
+[node name="polaroid_tape" type="Sprite" parent="Control/image"]
+position = Vector2( -37.1182, -1065.39 )
+rotation = 0.0687268
+scale = Vector2( 3.42337, 2.53943 )
+texture = ExtResource( 6 )
