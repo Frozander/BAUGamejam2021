@@ -4,6 +4,8 @@ const SPEED_Y_REF = [.25,0,0,0,-.25]
 const MAX_CAT_FOLLOWING_DISTANCE = 125
 const PETTING_DURATIONS = [3,5,7]
 
+var current_index = 0
+
 var speed_x = .5
 var speed_y = 0
 

@@ -2,7 +2,9 @@ extends Node2D
 
 const ZONE_X = 210 #width of move zone
 const ZONE_Y = 40
+
 const PERSON_COUNT = 3
+
 const PERSON_HEARING_MEOW_LOWER_LIMIT = 60
 
 const PART_CHANGE_X_GAP = 70
@@ -26,7 +28,6 @@ const BACKGROUNDS = [
 func _ready():
 	rng.randomize()
 	reset()
-
 
 func _unhandled_key_input(event):
 	if Input.is_action_pressed("ui_accept"):
@@ -63,17 +64,29 @@ func on_cat_meow():
 		
 
 func _on_RightPort_area_entered(area):
-	if area == $MoveZone/Cat:
-		if current_part < len(BACKGROUNDS) - 1:
+	if current_part < len(BACKGROUNDS) - 1:
+		if area.name == "CatBody":
 			change_part(current_part + 1)
+		elif area.name == "Person":
+			move_person(area, 1)
 		
 
 
 func _on_LeftPort_area_entered(area):
-	if area == $MoveZone/Cat:
-		if current_part > 0:
+	if current_part > 0:
+		if area.name == "CatBody":
 			change_part(current_part - 1)
+		elif area.name == "Person":
+			move_person(area, -1)
 			
+func move_person(area, dir = 1):
+	pass
+#	var index = area.current_index
+#	$MoveZone.remove_child(people[current_part][index])
+#	people[current_part + dir].append(people[current_part][index])
+#	people[current_part].remove(index)
+#	area.current_index = len(people[current_part + dir])
+#	area.position.x = ZONE_X * dir
 
 func find_closest_person_to_cat():
 	var closest_person_to_cat = people[current_part][0]
@@ -105,6 +118,7 @@ func init_people():
 		people.append([])
 		for p in PERSON_COUNT:
 			var person = PERSON.instance()
+      person.current_index = p
 			var rand = random_positon_in_move_zone();
 			person.position.x += rand[0]
 			person.position.y += rand[1]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Assets/Sprites/Person/guy2.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Scripts/Person.gd" type="Script" id=2]
@@ -83,6 +83,9 @@ extents = Vector2( 18, 7 )
 [sub_resource type="RectangleShape2D" id=17]
 extents = Vector2( 5.53405, 2.68344 )
 
+[sub_resource type="RectangleShape2D" id=18]
+extents = Vector2( 18.3195, 7.5722 )
+
 [node name="Person" type="Area2D"]
 position = Vector2( -7.62939e-06, -60.9178 )
 collision_mask = 2147483651
@@ -92,10 +95,10 @@ script = ExtResource( 2 )
 position = Vector2( -5.96046e-08, -5.96046e-08 )
 scale = Vector2( 1.5, 1.5 )
 frames = SubResource( 15 )
-animation = "pet"
+animation = "idle"
 
 [node name="BodyShape" type="CollisionShape2D" parent="."]
-position = Vector2( -7.99999, 53.9178 )
+position = Vector2( -1.98642, 53.4724 )
 shape = SubResource( 16 )
 
 [node name="PersonPetZone" type="Area2D" parent="."]
@@ -103,5 +106,11 @@ shape = SubResource( 16 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PersonPetZone"]
 position = Vector2( 23.1193, 31.8673 )
 shape = SubResource( 17 )
+
+[node name="PersonBody" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PersonBody"]
+position = Vector2( -0.66819, 53.4539 )
+shape = SubResource( 18 )
 [connection signal="area_entered" from="." to="." method="_on_Person_area_entered"]
 [connection signal="area_entered" from="PersonPetZone" to="." method="_on_PetZone_area_entered"]
