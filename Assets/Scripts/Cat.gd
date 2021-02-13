@@ -2,7 +2,7 @@ extends Area2D
 
 enum particleState {Happy, Sad, Meow}
 
-export var speed = 1
+export(float) var speed = 1
 export var run_multiplier = 2
 
 var movement_vector = Vector2(0, 0)
@@ -33,11 +33,11 @@ func _physics_process(_delta):
 #	else:
 #		$Particles2D.emitting = false
 		
-	if movement_vector.x == -1:
+	if movement_vector.x < 0:
 		$AnimatedSprite.flip_h = false
 		if sign($Particles2D.position.x) == 1:
 			$Particles2D.position.x *= -1
-	elif movement_vector.x == 1:
+	elif movement_vector.x > 0:
 		$AnimatedSprite.flip_h = true
 		if sign($Particles2D.position.x) == -1:
 			$Particles2D.position.x *= -1
@@ -45,10 +45,10 @@ func _physics_process(_delta):
 	# Exclusion Zone Collision
 	var areas = get_overlapping_areas()
 	for area in areas:
-			if "Person" in area.name:
-				collide_with_person(area)
-			else:
-				exclusion_check(area)
+		if "Person" in area.name or "Enemy" in area.name:
+			collide_with_person(area)
+		else:
+			exclusion_check(area)
 	
 	var mov = movement_vector.normalized() * speed 
 	
