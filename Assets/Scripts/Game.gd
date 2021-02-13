@@ -30,7 +30,7 @@ func _ready():
 	reset()
 
 func _unhandled_key_input(event):
-	if Input.is_action_pressed("ui_accept"):
+	if Input.is_action_pressed("meow") and Global.ability_cooldown_map["meow"].is_ready():
 		on_cat_meow()
 
 func random_positon_in_move_zone():
