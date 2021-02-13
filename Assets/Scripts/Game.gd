@@ -1,6 +1,6 @@
 extends Node2D
 
-const ZONE_X = 240
+const ZONE_X = 210 #width of move zone
 const ZONE_Y = 40
 const PERSON_COUNT = 4
 
@@ -42,9 +42,9 @@ func random_positon_in_move_zone():
 
 func change_part(part):
 	if current_part < part:
-		$MoveZone/Cat.position.x = 0
+		$MoveZone/Cat.position.x = -ZONE_X
 	elif current_part > part:
-		$MoveZone/Cat.position.x = (2 * ZONE_X) - (PART_CHANGE_X_GAP)
+		$MoveZone/Cat.position.x = ZONE_X
 		
 	if part != current_part:
 		for p in len(people[current_part]):
