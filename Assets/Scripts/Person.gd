@@ -80,9 +80,9 @@ func collide_with_person(person_area):
 	if global_position.x > person_area.global_position.x:
 		movment.x = 0 if movment.x < 0 else movment.x
 	if global_position.y < person_area.global_position.y:
-		movment.y = 0 if movment.y < 0 else movment.y
-	if global_position.y > person_area.global_position.y:
 		movment.y = 0 if movment.y > 0 else movment.y
+	if global_position.y > person_area.global_position.y:
+		movment.y = 0 if movment.y < 0 else movment.y
 
 func _on_Person_area_entered(area):
 #	print("Person Area Entered: %s" % area.name)

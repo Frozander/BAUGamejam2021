@@ -97,9 +97,9 @@ func collide_with_person(person_area):
 	if global_position.x > person_area.global_position.x:
 		movement_vector.x = 0 if movement_vector.x < 0 else movement_vector.x
 	if global_position.y < person_area.global_position.y:
-		movement_vector.y = 0 if movement_vector.y < 0 else movement_vector.y
-	if global_position.y > person_area.global_position.y:
 		movement_vector.y = 0 if movement_vector.y > 0 else movement_vector.y
+	if global_position.y > person_area.global_position.y:
+		movement_vector.y = 0 if movement_vector.y < 0 else movement_vector.y
 
 func exclusion_check(area):
 	match area.name:
