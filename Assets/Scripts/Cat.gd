@@ -14,7 +14,7 @@ var broken_heart = preload("res://Assets/Sprites/broken_heart.png")
 
 var meow = preload("res://Assets/Sounds/meow.wav")
 var purr = preload("res://Assets/Sounds/purr.wav")
-var angry = preload("res://Assets/sounds/angry.wav")
+var angry = preload("res://Assets/Sounds/angry.wav")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
