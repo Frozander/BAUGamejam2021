@@ -100,8 +100,7 @@ func go_to_cat():
 		is_going_to_cat = false
 		return
 	$AnimatedSprite.play("walk")
-	movement.x = speed_x * direction
-	movement.y = speed_y * direction
+	movement = (cat.position - position).normalized() / 2
 	position += movement
 
 func wait_for_cat():
