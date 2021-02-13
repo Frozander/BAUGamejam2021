@@ -16,3 +16,6 @@ func get_time_left():
 
 func start():
 	time = max_time
+	
+func reset():
+	time = 0
