@@ -34,7 +34,7 @@ __meta__ = {
 shape = SubResource( 1 )
 
 [node name="RightExclusion" type="Area2D" parent="."]
-position = Vector2( 447.857, 188.541 )
+position = Vector2( 469.046, 196.487 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -43,7 +43,7 @@ __meta__ = {
 shape = SubResource( 2 )
 
 [node name="LeftExclusion" type="Area2D" parent="."]
-position = Vector2( -20.3568, 189.249 )
+position = Vector2( -34.1298, 195.605 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -52,12 +52,18 @@ __meta__ = {
 shape = SubResource( 2 )
 
 [node name="TopExclusion" type="Area2D" parent="."]
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TopExclusion"]
 position = Vector2( 221.957, 146.736 )
 shape = SubResource( 3 )
 
 [node name="BottomExclusion" type="Area2D" parent="."]
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BottomExclusion"]
 position = Vector2( 223.017, 248.974 )

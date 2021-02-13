@@ -4,7 +4,7 @@ const ZONE_X = 240
 const ZONE_Y = 40
 const PERSON_COUNT = 4
 
-const PART_CHANGE_X_GAP = 30
+const PART_CHANGE_X_GAP = 70
 
 var rng = RandomNumberGenerator.new()
 
@@ -42,9 +42,9 @@ func random_positon_in_move_zone():
 
 func change_part (part):
 	if current_part < part:
-		$Cat.position.x = 0 + PART_CHANGE_X_GAP
+		$Cat.position.x = 0
 	elif current_part > part:
-		$Cat.position.x = (2 * ZONE_X) - (2.5 * PART_CHANGE_X_GAP)
+		$Cat.position.x = (2 * ZONE_X) - (PART_CHANGE_X_GAP)
 		
 	for p in len(people[current_part]):
 			$MoveZone.remove_child(people[current_part][p])
