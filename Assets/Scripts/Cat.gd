@@ -45,7 +45,10 @@ func _physics_process(_delta):
 	# Exclusion Zone Collision
 	var areas = get_overlapping_areas()
 	for area in areas:
-		exclusion_check(area)
+			if "Person" in area.name:
+				collide_with_person(area)
+			else:
+				exclusion_check(area)
 	
 	var mov = movement_vector.normalized() * speed 
 	
@@ -86,6 +89,16 @@ func get_angry():
 	current_state = particleState.Sad
 	$Particles2D.emitting = true
 	play_audio(angry)
+
+func collide_with_person(person_area):
+	if global_position.x < person_area.global_position.x:
+		movement_vector.x = 0 if movement_vector.x > 0 else movement_vector.x
+	if global_position.x > person_area.global_position.x:
+		movement_vector.x = 0 if movement_vector.x < 0 else movement_vector.x
+	if global_position.y < person_area.global_position.y:
+		movement_vector.y = 0 if movement_vector.y < 0 else movement_vector.y
+	if global_position.y > person_area.global_position.y:
+		movement_vector.y = 0 if movement_vector.y > 0 else movement_vector.y
 
 func exclusion_check(area):
 	match area.name:
