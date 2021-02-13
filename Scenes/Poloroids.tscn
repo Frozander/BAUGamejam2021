@@ -1,8 +1,55 @@
-[gd_scene format=2]
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Assets/Prefabs/MenuButton.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Prefabs/Polaroid.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/Images/Polaroids/2.jpg" type="Texture" id=3]
+[ext_resource path="res://Assets/Images/Polaroids/3.jpg" type="Texture" id=4]
+[ext_resource path="res://Assets/Images/Polaroids/4.jpg" type="Texture" id=5]
+[ext_resource path="res://Assets/Images/Polaroids/5.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Scripts/Poloroids.gd" type="Script" id=7]
 
 [node name="Poloroids" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Menu Button" parent="." instance=ExtResource( 1 )]
+margin_left = 10.027
+margin_top = 9.386
+margin_right = 158.0
+margin_bottom = 35.386
+load_scene_on_click = true
+scene_to_load = "res://Scenes/TitleScreen.tscn"
+label = "< Back To Main Menu"
+
+[node name="image1" parent="." instance=ExtResource( 2 )]
+position = Vector2( 102, 81.5 )
+rotation = 0.0
+scale = Vector2( 0.06, 0.06 )
+
+[node name="image2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 218.5, 81 )
+rotation = 0.0
+scale = Vector2( 0.06, 0.06 )
+texture = ExtResource( 3 )
+
+[node name="image3" parent="." instance=ExtResource( 2 )]
+position = Vector2( 333, 81.5 )
+rotation = 0.0
+scale = Vector2( 0.06, 0.06 )
+texture = ExtResource( 4 )
+
+[node name="image4" parent="." instance=ExtResource( 2 )]
+position = Vector2( 162, 180 )
+rotation = 0.0
+scale = Vector2( 0.06, 0.06 )
+texture = ExtResource( 5 )
+
+[node name="image5" parent="." instance=ExtResource( 2 )]
+position = Vector2( 276.5, 180 )
+rotation = 0.0
+scale = Vector2( 0.06, 0.06 )
+texture = ExtResource( 6 )
