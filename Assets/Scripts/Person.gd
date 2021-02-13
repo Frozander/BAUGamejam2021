@@ -28,15 +28,10 @@ func _process(delta):
 		movment.y = speed_y * direction
 		var areas = get_overlapping_areas()
 		for area in areas:
-			match area.name:
-				"TopExclusion":
-					movment.y = 0 if movment.y < 0 else movment.y
-				"BottomExclusion":
-					movment.y = 0 if movment.y > 0 else movment.y
-				"LeftExclusion":
-					movment.x = 0 if movment.x < 0 else movment.x
-				"RightExclusion":
-					movment.x = 0 if movment.x > 0 else movment.x
+			if "Person" in area.name:
+				collide_with_person(area)
+			else:
+				exclusion_check(area)
 		self.position += movment
 		
 func calc_move():
@@ -67,6 +62,26 @@ func idle():
 	$AnimatedSprite.play("idle")
 	is_walking = false
 
+func exclusion_check(area):
+	match area.name:
+		"TopExclusion":
+			movment.y = 0 if movment.y < 0 else movment.y
+		"BottomExclusion":
+			movment.y = 0 if movment.y > 0 else movment.y
+		"LeftExclusion":
+			movment.x = 0 if movment.x < 0 else movment.x
+		"RightExclusion":
+			movment.x = 0 if movment.x > 0 else movment.x
+
+func collide_with_person(person_area):
+	if global_position.x < person_area.global_position.x:
+		movment.x = 0 if movment.x > 0 else movment.x
+	if global_position.x > person_area.global_position.x:
+		movment.x = 0 if movment.x < 0 else movment.x
+	if global_position.y < person_area.global_position.y:
+		movment.y = 0 if movment.y < 0 else movment.y
+	if global_position.y > person_area.global_position.y:
+		movment.y = 0 if movment.y > 0 else movment.y
 
 func _on_Person_area_entered(area):
 #	print("Person Area Entered: %s" % area.name)
