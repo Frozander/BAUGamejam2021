@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Assets/AnimatedSprites/Cat.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://Assets/ParticleMaterials/heartMat.tres" type="Material" id=2]
@@ -7,24 +7,25 @@
 [ext_resource path="res://Assets/Sounds/meow.wav" type="AudioStream" id=5]
 [ext_resource path="res://Assets/Shaders/cat_shader.shader" type="Shader" id=6]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 14, 11 )
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 14, 2 )
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 6 )
 shader_param/offset = Vector2( 0, 1 )
 shader_param/modulate = null
 
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 14, 11 )
+
 [node name="Cat" type="Area2D"]
 collision_layer = 2
+collision_mask = 3
 script = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 2 )
-shape = SubResource( 1 )
-__meta__ = {
-"_edit_lock_": true
-}
+position = Vector2( 0, 11 )
+shape = SubResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 material = SubResource( 2 )
@@ -32,6 +33,7 @@ position = Vector2( 0, 1 )
 scale = Vector2( 1.5, 1.5 )
 frames = ExtResource( 1 )
 animation = "idle"
+frame = 2
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -52,5 +54,14 @@ texture = ExtResource( 3 )
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
 volume_db = -5.361
+
+[node name="CatPetArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="CatPetArea"]
+position = Vector2( 0, 2 )
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
 [connection signal="area_entered" from="." to="." method="_on_Cat_area_entered"]
 [connection signal="finished" from="AudioStreamPlayer" to="." method="_on_AudioStreamPlayer_finished"]
