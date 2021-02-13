@@ -39,7 +39,7 @@ func update_label_value():
 	$TimeLabel.text = "%3.1f" % cooldown.time
 	
 func update_texture_progress_value():
-	$TextureProgress.value = int((cooldown.get_time_left()/cooldown.max_time)*100)
+	$TextureProgress.value = int((cooldown.time/cooldown.max_time)*100)
 
 func set_to_ready_state():
 	$TextureProgress.value = 0
