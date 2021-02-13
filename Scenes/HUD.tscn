@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Assets/Prefabs/AbilityButton.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Prefabs/PhotoProgressBar.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/Prefabs/CountDownLabel.tscn" type="PackedScene" id=3]
+
+[node name="HUD" type="Node2D"]
+position = Vector2( 7.94597, 7.41624 )
+
+[node name="AbilityButton" parent="." instance=ExtResource( 1 )]
+margin_top = 11.6685
+margin_right = 26.0
+margin_bottom = 27.6685
+ability_label = "1"
+
+[node name="AbilityButton2" parent="." instance=ExtResource( 1 )]
+margin_left = 90.0
+margin_top = 11.6685
+margin_right = 106.0
+margin_bottom = 27.6685
+ability_label = "3"
+
+[node name="AbilityButton3" parent="." instance=ExtResource( 1 )]
+margin_left = 50.0
+margin_top = 11.6685
+margin_right = 66.0
+margin_bottom = 27.6685
+
+[node name="PhotoProgressBar" parent="." instance=ExtResource( 2 )]
+position = Vector2( 260, 10 )
+
+[node name="CountDownLabel" parent="." instance=ExtResource( 3 )]
+position = Vector2( 218.661, 6.69093 )

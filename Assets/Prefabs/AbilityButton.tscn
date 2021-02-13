@@ -1,0 +1,67 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Assets/Sprites/heart.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Scripts/AbilityButton.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Fonts/IndieFlower-Regular.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="DynamicFont" id=2]
+size = 12
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=1]
+size = 10
+font_data = ExtResource( 3 )
+
+[node name="AbilityButton" type="TextureButton"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 23.4613
+margin_bottom = 20.009
+texture_normal = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+cooldown = 2.0
+action_key = "ui_accept"
+icon = ExtResource( 1 )
+ability_label = "2"
+
+[node name="AbilityLabel" type="Label" parent="."]
+margin_left = -7.21594
+margin_top = -12.45
+margin_right = 39.7841
+margin_bottom = 5.55003
+custom_fonts/font = SubResource( 2 )
+text = "2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureProgress" type="TextureProgress" parent="."]
+modulate = Color( 0.184314, 0.184314, 0.184314, 1 )
+margin_right = 16.0
+margin_bottom = 16.0
+fill_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="TimeLabel" type="Label" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -0.111362
+margin_bottom = -0.111362
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = -3
+text = "0.0"
+align = 1
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
