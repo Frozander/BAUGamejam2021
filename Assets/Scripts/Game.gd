@@ -118,7 +118,7 @@ func init_people():
 		people.append([])
 		for p in PERSON_COUNT:
 			var person = PERSON.instance()
-      person.current_index = p
+			person.current_index = p
 			var rand = random_positon_in_move_zone();
 			person.position.x += rand[0]
 			person.position.y += rand[1]
