@@ -1,44 +1,80 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Assets/Sprites/Person/guy2.png" type="Texture" id=1]
 
-[sub_resource type="Animation" id=1]
-resource_name = "Walk"
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 9, 10, 11, 12, 13, 14, 15, 16, 17, 18 ]
-}
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 162, 64, 81 )
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 18.7133, 55.6815 )
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 81, 64, 81 )
 
-[node name="Person" type="Node2D"]
-position = Vector2( 154.682, 114.422 )
-__meta__ = {
-"_edit_group_": true
-}
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 1 )
+region = Rect2( 64, 81, 64, 81 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Walk = SubResource( 1 )
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 1 )
+region = Rect2( 128, 81, 64, 81 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 81, 64, 81 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 1 )
+region = Rect2( 256, 81, 64, 81 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 1 )
+region = Rect2( 320, 81, 64, 81 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 1 )
+region = Rect2( 384, 81, 64, 81 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 1 )
+region = Rect2( 448, 81, 64, 81 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 162, 64, 81 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 1 )
+region = Rect2( 64, 162, 64, 81 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 1 )
+region = Rect2( 128, 162, 64, 81 )
+
+[sub_resource type="SpriteFrames" id=13]
+animations = [ {
+"frames": [ SubResource( 1 ) ],
+"loop": false,
+"name": "idle",
+"speed": 0.0
+}, {
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ],
+"loop": true,
+"name": "walk",
+"speed": 9.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=14]
+extents = Vector2( 59.4587, 55.6815 )
+
+[node name="Person" type="Area2D"]
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( -5.96046e-08, -5.96046e-08 )
 scale = Vector2( 1.5, 1.5 )
-texture = ExtResource( 1 )
-vframes = 3
-hframes = 8
-frame = 9
+frames = SubResource( 13 )
+animation = "walk"
+frame = 5
 
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( 2.89366, 3.51791 )
-shape = SubResource( 2 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 12.8937, 5.51791 )
+shape = SubResource( 14 )
