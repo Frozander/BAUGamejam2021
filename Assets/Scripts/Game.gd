@@ -2,7 +2,8 @@ extends Node2D
 
 const ZONE_X = 240
 const ZONE_Y = 40
-const PERSON_COUNT = 4
+const PERSON_COUNT = 2
+const PERSON_HEARING_MEOW_LOWER_LIMIT = 75
 
 const PART_CHANGE_X_GAP = 70
 
@@ -23,7 +24,6 @@ const BACKGROUNDS = [
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
 	rng.randomize()
 	for i in 3:
 		people.append([])
@@ -34,6 +34,11 @@ func _ready():
 			person.position.y += rand[1]
 			people[i].append(person)
 	change_part(1)
+
+func _unhandled_key_input(event):
+	if not Input.is_action_pressed("ui_accept"):
+		return
+	on_cat_meow()
 
 func random_positon_in_move_zone():
 	var x = rng.randf_range(-ZONE_X, ZONE_X)
@@ -57,6 +62,14 @@ func change_part(part):
 		
 	$Backgound.texture = BACKGROUNDS[current_part]
 
+func on_cat_meow():
+	$MoveZone/Cat.play_audio()
+	var closest_person = find_closest_person_to_cat()
+	var dist = dist_between_cat_and_person(closest_person)
+	if dist < PERSON_HEARING_MEOW_LOWER_LIMIT:
+		closest_person.on_hear_meow($MoveZone/Cat)
+		
+
 func _on_RightPort_area_entered(area):
 	if area == $MoveZone/Cat:
 		if current_part < len(BACKGROUNDS) - 1:
@@ -68,3 +81,18 @@ func _on_LeftPort_area_entered(area):
 	if area == $MoveZone/Cat:
 		if current_part > 0:
 			change_part(current_part - 1)
+			
+
+func find_closest_person_to_cat():
+	var closest_person_to_cat = people[current_part][0]
+	var min_dist = dist_between_cat_and_person(closest_person_to_cat)
+	for person in people[current_part]:
+		var dist = dist_between_cat_and_person(person)
+		if dist < min_dist:
+			closest_person_to_cat = person
+			min_dist = dist
+	return closest_person_to_cat
+
+func dist_between_cat_and_person(person):
+	var diff = person.position - $MoveZone/Cat.position
+	return abs(diff.x)
