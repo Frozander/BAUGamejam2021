@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Assets/Scripts/CountDownLabel.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Fonts/IndieFlower-Regular.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 2 )
+
+[node name="CountDownLabel" type="Node2D"]
+script = ExtResource( 1 )
+start_in_seconds = 90
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="Label" type="Label" parent="."]
+margin_right = 23.0
+margin_bottom = 24.0
+custom_fonts/font = SubResource( 1 )
+text = "2:30"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
