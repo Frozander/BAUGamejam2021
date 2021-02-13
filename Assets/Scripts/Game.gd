@@ -2,8 +2,8 @@ extends Node2D
 
 const ZONE_X = 210 #width of move zone
 const ZONE_Y = 40
-const PERSON_COUNT = 4
-const PERSON_HEARING_MEOW_LOWER_LIMIT = 75
+const PERSON_COUNT = 1
+const PERSON_HEARING_MEOW_LOWER_LIMIT = 60
 
 const PART_CHANGE_X_GAP = 70
 
