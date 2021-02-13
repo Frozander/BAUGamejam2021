@@ -16,16 +16,19 @@ var meow = preload("res://Assets/Sounds/meow.wav")
 var purr = preload("res://Assets/Sounds/purr.wav")
 var angry = preload("res://Assets/Sounds/angry.wav")
 
+var is_petting = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
 
 func _physics_process(_delta):
 	movement_vector = Vector2(0, 0)
-	if Input.is_action_pressed("ui_up"): movement_vector += Vector2.UP
-	if Input.is_action_pressed("ui_down"): movement_vector += Vector2.DOWN
-	if Input.is_action_pressed("ui_left"): movement_vector += Vector2.LEFT
-	if Input.is_action_pressed("ui_right"): movement_vector += Vector2.RIGHT
+	if is_petting == false:
+		if Input.is_action_pressed("ui_up"): movement_vector += Vector2.UP
+		if Input.is_action_pressed("ui_down"): movement_vector += Vector2.DOWN
+		if Input.is_action_pressed("ui_left"): movement_vector += Vector2.LEFT
+		if Input.is_action_pressed("ui_right"): movement_vector += Vector2.RIGHT
 	
 	if Input.is_action_just_pressed("ui_select"):
 		play_audio(meow)
@@ -53,7 +56,13 @@ func _physics_process(_delta):
 	var mov = movement_vector.normalized() * speed 
 	
 	if mov == Vector2.ZERO:
-		$AnimatedSprite.play('idle')
+		if is_petting:
+			play_audio(purr)
+			current_state = particleState.Happy
+			$Particles2D.emitting = true
+			$AnimatedSprite.play('sit')
+		else:
+			$AnimatedSprite.play('idle')
 	elif Input.is_action_pressed("ui_run"):
 		mov *= run_multiplier
 		$AnimatedSprite.play('run')
@@ -75,15 +84,18 @@ func play_audio(stream = meow):
 		$AudioStreamPlayer.stream = stream
 		$AudioStreamPlayer.play()
 
-func get_pet():
-	current_state = particleState.Happy
-	$Particles2D.emitting = true
-	play_audio(purr)
+func start_petting():
+	is_petting = true
+	
+	
+func finish_petting():
+	is_petting = false
 
 func get_angry():
 	current_state = particleState.Sad
 	$Particles2D.emitting = true
 	play_audio(angry)
+	
 
 func collide_with_person(person_area):
 	if global_position.x < person_area.global_position.x:

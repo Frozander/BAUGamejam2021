@@ -2,6 +2,7 @@ extends Area2D
 
 const SPEED_Y_REF = [.25,0,0,0,-.25]
 const MAX_CAT_FOLLOWING_DISTANCE = 125
+const PETTING_DURATIONS = [3,5,7]
 
 var speed_x = .5
 var speed_y = 0
@@ -11,9 +12,14 @@ var delta_count = 0
 var is_walking = false
 var is_going_to_cat = false
 var is_waiting_cat = false
+var is_petting_cat = false
+var is_petted_cat = false
 var cat: Node2D
  
 var movement = Vector2()
+
+var petting_duration = 3
+
 
 
 func _ready():
@@ -23,33 +29,37 @@ func _ready():
 func _process(delta):	
 	delta_count += delta
 	
-	if delta_count > 3 and not is_going_to_cat and not is_waiting_cat:
-		calc_move()
-			
-	if is_walking and not is_going_to_cat and not is_waiting_cat:
-		movement.x = speed_x * direction
-		movement.y = speed_y * direction
-		var areas = get_overlapping_areas()
-		for area in areas:
-			if "Person" in area.name:
-				collide_with_person(area)
+	if is_petting_cat:
+		if delta_count > petting_duration:
+			end_petting()
+	else:
+		if delta_count > 3 and not is_going_to_cat and not is_waiting_cat:
+			calc_move()
+				
+		if is_walking and not is_going_to_cat and not is_waiting_cat:
+			movement.x = speed_x * direction
+			movement.y = speed_y * direction
+			var areas = get_overlapping_areas()
+			for area in areas:
+				if "Person" in area.name:
+					collide_with_person(area)
+				else:
+					exclusion_check(area)
+			self.position += movement
+			self.z_index = $BodyShape.position.y
+
+		if not self.cat:
+			return
+
+		var dist_to_cat = position.distance_to(cat.position)
+		if (is_going_to_cat or is_waiting_cat) and dist_to_cat > MAX_CAT_FOLLOWING_DISTANCE:
+			stop_following_cat()
+		if is_going_to_cat:
+			face_to_cat()
+			if dist_to_cat < 55:
+				wait_for_cat()
 			else:
-				exclusion_check(area)
-		self.position += movement
-		self.z_index = $BodyShape.position.y
-
-	if not self.cat:
-		return
-
-	var dist_to_cat = position.distance_to(cat.position)
-	if (is_going_to_cat or is_waiting_cat) and dist_to_cat > MAX_CAT_FOLLOWING_DISTANCE:
-		stop_following_cat()
-	if is_going_to_cat:
-		face_to_cat()
-		if dist_to_cat < 55:
-			wait_for_cat()
-		else:
-			go_to_cat()
+				go_to_cat()
 		
 		
 func calc_move():
@@ -79,9 +89,10 @@ func idle():
 	is_walking = false
 
 func on_hear_meow(cat):
-	is_going_to_cat = true
-	self.cat = cat
-	face_to_cat()
+	if not is_petted_cat:
+		is_going_to_cat = true
+		self.cat = cat
+		face_to_cat()
 	
 func go_to_cat():
 	is_going_to_cat = true
@@ -94,13 +105,28 @@ func go_to_cat():
 	position += movement
 
 func wait_for_cat():
-	is_waiting_cat = true
-	is_walking = false
-	$AnimatedSprite.play("pet")
-	$AnimatedSprite.stop()
+	if is_petting_cat == false:
+		is_waiting_cat = true
+		is_walking = false
+		$AnimatedSprite.play("pet")
+		$AnimatedSprite.stop()
 
 func pet_cat():
-	$AnimatedSprite.play("pet")	
+	delta_count = 0
+	petting_duration = PETTING_DURATIONS[randi() % PETTING_DURATIONS.size()]
+	is_petting_cat = true
+	is_waiting_cat = false
+	self.cat.start_petting()
+	$AnimatedSprite.play("pet")
+
+func end_petting():
+	is_petting_cat = false
+	is_petted_cat = true
+	is_waiting_cat = false
+	is_going_to_cat = false
+	calc_move()
+	delta_count = 0
+	self.cat.finish_petting()
 
 func face_to_cat():
 	if position.x < cat.position.x:
@@ -140,6 +166,9 @@ func _on_Person_area_entered(area):
 #	print("Person Area Entered: %s" % area.name)
 	pass
 
-func _on_PetArea_area_entered(area):
-#	print("Pet Area Entered: %s" % area.name)
-	pass
+
+func _on_PetZone_area_entered(area):
+	print(area.name)
+	if is_waiting_cat && area.name == "CatPetZone":
+		pet_cat()
+		
