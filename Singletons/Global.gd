@@ -8,7 +8,7 @@ var DEFAULT_DAY_LENGTH_IN_SECONDS = 120
 var ability_cooldown_map = {
 	"meow": Cooldown.new(3.0),
 	"pose": Cooldown.new(4.0),
-	"third": Cooldown.new(5.0)
+	"leave": Cooldown.new(5.0)
 }
 
 var DAY_IMAGE_MAP = {

@@ -21,7 +21,7 @@ margin_left = 96.0
 margin_top = 13.6685
 margin_right = 112.0
 margin_bottom = 30.0
-action_key = "third"
+action_key = "leave"
 ability_label = "3"
 
 [node name="AbilityButton3" parent="." instance=ExtResource( 1 )]
