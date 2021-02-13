@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Fonts/IndieFlower-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Assets/Scripts/DayEnd.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Images/Polaroids/image.jpg" type="Texture" id=3]
 [ext_resource path="res://Assets/Prefabs/MenuButton.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Prefabs/CustomProgressBar.tscn" type="PackedScene" id=5]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Control
@@ -24,22 +25,6 @@ size = 12
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 1 )
-
-[sub_resource type="StyleBoxFlat" id=3]
-bg_color = Color( 0.784314, 0.196078, 0.196078, 1 )
-border_color = Color( 0.784314, 0.196078, 0.196078, 1 )
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
-
-[sub_resource type="StyleBoxFlat" id=4]
-bg_color = Color( 1, 1, 1, 1 )
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
-corner_detail = 6
 
 [node name="DayEnd" type="Control"]
 anchor_right = 1.0
@@ -102,20 +87,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ProgressBar" type="ProgressBar" parent="Control"]
+[node name="ProgressBar" parent="Control" instance=ExtResource( 5 )]
 anchor_top = 0.5
 anchor_right = 0.4
 anchor_bottom = 0.5
 margin_left = 30.0
-margin_top = 0.471939
 margin_right = 30.0
 margin_bottom = 15.0
-custom_styles/fg = SubResource( 3 )
-custom_styles/bg = SubResource( 4 )
-percent_visible = false
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="image" type="Sprite" parent="Control"]
 position = Vector2( 254.832, 82.069 )
