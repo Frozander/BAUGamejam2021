@@ -16,6 +16,7 @@ shader_param/offset = Vector2( 0, 1 )
 shader_param/modulate = null
 
 [node name="Cat" type="Area2D"]
+collision_layer = 2
 script = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -51,4 +52,5 @@ texture = ExtResource( 3 )
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
 volume_db = -5.361
+[connection signal="area_entered" from="." to="." method="_on_Cat_area_entered"]
 [connection signal="finished" from="AudioStreamPlayer" to="." method="_on_AudioStreamPlayer_finished"]
