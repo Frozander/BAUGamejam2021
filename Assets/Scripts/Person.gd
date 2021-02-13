@@ -26,6 +26,17 @@ func _process(delta):
 	if is_walking:
 		movment.x = speed_x * direction
 		movment.y = speed_y * direction
+		var areas = get_overlapping_areas()
+		for area in areas:
+			match area.name:
+				"TopExclusion":
+					movment.y = 0 if movment.y < 0 else movment.y
+				"BottomExclusion":
+					movment.y = 0 if movment.y > 0 else movment.y
+				"LeftExclusion":
+					movment.x = 0 if movment.x < 0 else movment.x
+				"RightExclusion":
+					movment.x = 0 if movment.x > 0 else movment.x
 		self.position += movment
 		
 func calc_move():
@@ -55,3 +66,12 @@ func walk():
 func idle():
 	$AnimatedSprite.play("idle")
 	is_walking = false
+
+
+func _on_Person_area_entered(area):
+#	print("Person Area Entered: %s" % area.name)
+	pass
+
+func _on_PetArea_area_entered(area):
+#	print("Pet Area Entered: %s" % area.name)
+	pass
