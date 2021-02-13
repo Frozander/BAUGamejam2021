@@ -111,8 +111,8 @@ margin_left = 216.245
 margin_top = 156.554
 margin_right = 321.245
 margin_bottom = 182.554
-load_scene_on_click = false
-scene_to_load = ""
+load_scene_on_click = true
+scene_to_load = "res://Scenes/Game.tscn"
 label = "Next Day >"
 
 [node name="image" type="Sprite" parent="Control"]
