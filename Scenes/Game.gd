@@ -46,7 +46,8 @@ func change_part (part):
 	elif current_part > part:
 		$Cat.position.x = (2 * ZONE_X) - (PART_CHANGE_X_GAP)
 		
-	for p in len(people[current_part]):
+	if part != current_part:
+		for p in len(people[current_part]):
 			$MoveZone.remove_child(people[current_part][p])
 		
 	current_part = part

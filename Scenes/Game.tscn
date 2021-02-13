@@ -19,10 +19,8 @@ script = ExtResource( 3 )
 [node name="Backgound" type="Sprite" parent="."]
 position = Vector2( 227.854, 136.228 )
 scale = Vector2( 0.286086, 0.286086 )
+z_index = -1000
 texture = ExtResource( 1 )
-
-[node name="Cat" parent="." instance=ExtResource( 2 )]
-position = Vector2( 279.635, 177.739 )
 
 [node name="MoveZone" type="Area2D" parent="."]
 position = Vector2( 217.233, 197.956 )
@@ -32,6 +30,9 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MoveZone"]
 shape = SubResource( 1 )
+
+[node name="Cat" parent="MoveZone" instance=ExtResource( 2 )]
+position = Vector2( 62.402, -20.217 )
 
 [node name="RightExclusion" type="Area2D" parent="."]
 position = Vector2( 469.046, 196.487 )

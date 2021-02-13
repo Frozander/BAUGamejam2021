@@ -17,7 +17,7 @@ func _ready():
 	delta_count = rand_range(-2,2)
 	calc_move()
 
-func _process(delta):
+func _process(delta):	
 	delta_count += delta
 	
 	if(delta_count > 3):
@@ -33,6 +33,7 @@ func _process(delta):
 			else:
 				exclusion_check(area)
 		self.position += movment
+		self.z_index = $BodyShape.position.y
 		
 func calc_move():
 	direction = rand_dir()
