@@ -5,7 +5,6 @@
 [ext_resource path="res://Assets/Images/Polaroids/image.jpg" type="Texture" id=3]
 [ext_resource path="res://Assets/Prefabs/MenuButton.tscn" type="PackedScene" id=4]
 
-
 [sub_resource type="GDScript" id=1]
 script/source = "extends Control
 
@@ -22,6 +21,8 @@ func _ready():
 
 [sub_resource type="DynamicFont" id=2]
 size = 12
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 1 )
 
 [sub_resource type="StyleBoxFlat" id=3]
@@ -39,20 +40,6 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 corner_detail = 6
-
-[sub_resource type="GDScript" id=5]
-script/source = "extends Button
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	var path = \"res://Fonts/IndieFlower-Regular.ttf\" 
-	var new_font = DynamicFont.new()
-	var new_data = DynamicFontData.new()
-	new_data.font_path = path
-	new_font.font_data = new_data
-	new_font.size = 10
-	set(\"custom_fonts/font\", new_font)
-"
 
 [node name="DayEnd" type="Control"]
 anchor_right = 1.0
@@ -130,33 +117,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ContinueButton" type="Button" parent="Control"]
-anchor_left = 0.5
-anchor_top = 0.95
-anchor_right = 0.9
-anchor_bottom = 0.95
-margin_left = 20.0
-margin_top = 0.445435
-margin_bottom = 20.4454
-text = "Next Day >"
-script = SubResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="MainMenuButton" type="Button" parent="Control"]
-anchor_left = 0.1
-anchor_top = 0.95
-anchor_right = 0.5
-anchor_bottom = 0.95
-margin_right = -20.0
-margin_bottom = 20.0
-text = "Main Menu"
-script = SubResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="image" type="Sprite" parent="Control"]
 position = Vector2( 254.832, 82.069 )
 rotation = -0.0872665
@@ -177,6 +137,4 @@ margin_left = 216.245
 margin_top = 156.554
 margin_right = 321.245
 margin_bottom = 182.554
-load_scene_on_click = false
-scene_to_load = ""
 label = "Next Day >"

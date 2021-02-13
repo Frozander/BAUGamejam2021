@@ -4,12 +4,16 @@
 [ext_resource path="res://Assets/Scripts/AbilityButton.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Fonts/IndieFlower-Regular.ttf" type="DynamicFontData" id=3]
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=1]
 size = 12
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=2]
 size = 10
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 3 )
 
 [node name="AbilityButton" type="TextureButton"]
@@ -32,7 +36,7 @@ margin_left = -7.21594
 margin_top = -12.45
 margin_right = 39.7841
 margin_bottom = 5.55003
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 text = "2"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -55,7 +59,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -0.111362
 margin_bottom = -0.111362
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_constants/shadow_as_outline = -3
 text = "0.0"
