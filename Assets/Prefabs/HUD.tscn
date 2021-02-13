@@ -1,11 +1,13 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Assets/Prefabs/AbilityButton.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Prefabs/PhotoProgressBar.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Prefabs/CountDownLabel.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Scripts/HUD.gd" type="Script" id=4]
 
 [node name="HUD" type="Node2D"]
 position = Vector2( 7.94597, 7.41624 )
+script = ExtResource( 4 )
 
 [node name="AbilityButton" parent="." instance=ExtResource( 1 )]
 margin_left = 16.0
@@ -34,3 +36,4 @@ position = Vector2( 260, 12 )
 
 [node name="CountDownLabel" parent="." instance=ExtResource( 3 )]
 position = Vector2( 218.661, 8.69093 )
+[connection signal="timeout" from="CountDownLabel" to="." method="_on_CountDownLabel_timeout"]

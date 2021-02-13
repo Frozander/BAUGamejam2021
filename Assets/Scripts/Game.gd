@@ -96,3 +96,7 @@ func find_closest_person_to_cat():
 func dist_between_cat_and_person(person):
 	var diff = person.position - $MoveZone/Cat.position
 	return abs(diff.x)
+
+
+func _on_HUD_timeout():
+	get_tree().change_scene("res://Scenes/FadeIn.tscn")

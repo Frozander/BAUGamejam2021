@@ -19,6 +19,7 @@ script = ExtResource( 3 )
 
 [node name="HUD" parent="." instance=ExtResource( 4 )]
 position = Vector2( 0, 0 )
+start_in_seconds = 3
 
 [node name="Backgound" type="Sprite" parent="."]
 position = Vector2( 227.854, 136.228 )
@@ -72,5 +73,6 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BottomExclusion"]
 position = Vector2( 223.017, 248.974 )
 shape = SubResource( 3 )
+[connection signal="timeout" from="HUD" to="." method="_on_HUD_timeout"]
 [connection signal="area_entered" from="RightExclusion" to="." method="_on_RightPort_area_entered"]
 [connection signal="area_entered" from="LeftExclusion" to="." method="_on_LeftPort_area_entered"]

@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Assets/Fonts/IndieFlower-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Assets/Prefabs/MenuButton.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/FadeIn.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/Images/Backgrounds/background_00.png" type="Texture" id=4]
 
 [sub_resource type="GDScript" id=1]
@@ -61,10 +60,6 @@ text = "The Cat of Hagia Sophia"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="FadeIn" parent="." instance=ExtResource( 3 )]
-visible = false
-color = Color( 0, 0, 0, 0 )
 
 [node name="StartGameButton" parent="." instance=ExtResource( 2 )]
 margin_left = 158.176
