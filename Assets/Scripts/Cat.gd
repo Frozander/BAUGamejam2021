@@ -7,6 +7,8 @@ export var run_multiplier = 2
 
 var movement_vector = Vector2(0, 0)
 var is_playing_audio = false
+var is_getting_pet = false
+var target
 
 var current_state = particleState.Happy
 var heart = preload("res://Assets/Sprites/heart.png")
@@ -22,13 +24,25 @@ func _ready():
 
 func _physics_process(_delta):
 	movement_vector = Vector2(0, 0)
-	if Input.is_action_pressed("ui_up"): movement_vector += Vector2.UP
-	if Input.is_action_pressed("ui_down"): movement_vector += Vector2.DOWN
-	if Input.is_action_pressed("ui_left"): movement_vector += Vector2.LEFT
-	if Input.is_action_pressed("ui_right"): movement_vector += Vector2.RIGHT
+	if !is_getting_pet:
+		if Input.is_action_pressed("ui_up"): movement_vector += Vector2.UP
+		if Input.is_action_pressed("ui_down"): movement_vector += Vector2.DOWN
+		if Input.is_action_pressed("ui_left"): movement_vector += Vector2.LEFT
+		if Input.is_action_pressed("ui_right"): movement_vector += Vector2.RIGHT
+	elif !$Particles2D.emitting:
+		movement_vector = target.get_node("PetPosition").global_position - global_position
+		if movement_vector.is_equal_approx(Vector2.ZERO):
+			movement_vector = Vector2.ZERO
+			position = target.get_node("PetPosition").global_position
+			current_state = particleState.Happy
+			$Particles2D.emitting = true
+	
+	if !$Particles2D.emitting and movement_vector == Vector2.ZERO:
+		is_getting_pet = false
 	
 	if Input.is_action_just_pressed("ui_select"):
 		play_audio(meow)
+		call_to_pet(get_parent().get_node("Person"))
 #		$Particles2D.emitting = true
 #	else:
 #		$Particles2D.emitting = false
@@ -53,7 +67,10 @@ func _physics_process(_delta):
 	var mov = movement_vector.normalized() * speed 
 	
 	if mov == Vector2.ZERO:
-		$AnimatedSprite.play('idle')
+		if is_getting_pet:
+			$AnimatedSprite.play("sit")
+		else:
+			$AnimatedSprite.play('idle')
 	elif Input.is_action_pressed("ui_run"):
 		mov *= run_multiplier
 		$AnimatedSprite.play('run')
@@ -74,6 +91,11 @@ func play_audio(stream = meow):
 		is_playing_audio = true
 		$AudioStreamPlayer.stream = stream
 		$AudioStreamPlayer.play()
+
+func call_to_pet(person):
+	if person != null:
+		is_getting_pet = true
+		target = person
 
 func get_pet():
 	current_state = particleState.Happy
