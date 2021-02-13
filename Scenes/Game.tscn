@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Assets/Images/Backgrounds/background_first_floor_pixelart.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Prefabs/Cat.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/Game.gd" type="Script" id=3]
+[ext_resource path="res://Assets/Scripts/Game.gd" type="Script" id=3]
+[ext_resource path="res://Assets/Prefabs/HUD.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 240, 40 )
@@ -15,6 +16,9 @@ extents = Vector2( 253.227, 10 )
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 3 )
+
+[node name="HUD" parent="." instance=ExtResource( 4 )]
+position = Vector2( 0, 0 )
 
 [node name="Backgound" type="Sprite" parent="."]
 position = Vector2( 227.854, 136.228 )
