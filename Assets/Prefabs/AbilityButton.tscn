@@ -26,8 +26,6 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-cooldown = 2.0
-action_key = "ui_accept"
 icon = ExtResource( 1 )
 ability_label = "2"
 
@@ -51,9 +49,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Timer" type="Timer" parent="."]
-one_shot = true
-
 [node name="TimeLabel" type="Label" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -68,4 +63,3 @@ clip_text = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
