@@ -19,6 +19,10 @@ config/name="Ayasofya The Game"
 run/main_scene="res://Scenes/TitleScreen.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Global="*res://Singletons/Global.gd"
+
 [display]
 
 window/size/width=426

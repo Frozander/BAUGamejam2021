@@ -3,14 +3,6 @@ extends Control
 export(int) var day
 export(int) var percentage
 
-var DAY_IMAGE_PATH_MAP = {
-	1: load("res://Assets/Images/Polaroids/1.jpg"),
-	2: load("res://Assets/Images/Polaroids/2.jpg"),
-	3: load("res://Assets/Images/Polaroids/3.jpg"),
-	4: load("res://Assets/Images/Polaroids/4.jpg"),
-	5: load("res://Assets/Images/Polaroids/5.png")
-}
-
 func _on_MainMenuButton_pressed():
 	get_tree().change_scene("res://Scenes/TitleScreen.tscn")
 
@@ -37,7 +29,7 @@ func set_progress_percentage(score):
 		resize_progress_to_max_width()
 
 func set_polaroid():
-	$Control/image.set_texture(DAY_IMAGE_PATH_MAP[day])
+	$Control/image.set_texture(Global.get_current_day_image())
 
 func hide_photo_taken():
 	$Control/image.hide()

@@ -3,6 +3,9 @@ extends Node2D
 export(int) var start_in_seconds
 signal timeout
 
+func _ready():
+	set_start_in_secodnds(Global.DEFAULT_DAY_LENGTH_IN_SECONDS)
+
 func _process(delta):
 	$Label.text = convert_second_to_minute_string($Timer.time_left)
 

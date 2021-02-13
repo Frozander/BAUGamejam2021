@@ -36,9 +36,8 @@ func _ready():
 	change_part(1)
 
 func _unhandled_key_input(event):
-	if not Input.is_action_pressed("ui_accept"):
-		return
-	on_cat_meow()
+	if Input.is_action_pressed("ui_accept"):
+		on_cat_meow()
 
 func random_positon_in_move_zone():
 	var x = rng.randf_range(-ZONE_X, ZONE_X)
