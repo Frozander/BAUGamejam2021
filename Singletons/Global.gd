@@ -23,12 +23,25 @@ var DAY_IMAGE_MAP = {
 	5: preload("res://Assets/Images/Polaroids/5.png")
 }
 
+var taken_image_keys = []
+
 func get_current_day_image():
 	return DAY_IMAGE_MAP[current_day]
+
+func finish_day():
+	if is_image_taken():
+		taken_image_keys.append(current_day)
+	reset_cooldowns()
+	reset_pet_meter_values()
+	current_day += 1
 
 func reset_cooldowns():
 	for c in ability_cooldown_map.values():
 		c.reset()
 
+func is_image_taken():
+	return pet_meter_current_value >= pet_meter_max_value
+
 func reset_pet_meter_values():
 	pet_meter_current_value = 0.0
+

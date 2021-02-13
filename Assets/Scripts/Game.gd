@@ -102,7 +102,6 @@ func dist_between_cat_and_person(person):
 
 
 func _on_HUD_timeout():
-	Global.current_day += 1
 	get_tree().change_scene("res://Scenes/FadeIn.tscn")
 
 func reset():
