@@ -6,9 +6,9 @@ const DEFAULT_DAY_LENGTH_IN_SECONDS = 90
 const LAST_DAY = 5
 var current_day = 1
 
-var pet_meter_step = 10.0
+#var pet_meter_step = 10.0
 var pet_meter_current_value = 0.0
-var pet_meter_max_value = 100.0
+var pet_meter_max_value = 50.0
 
 var is_last_day_photo_taken = false
 

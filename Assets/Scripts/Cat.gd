@@ -107,6 +107,8 @@ func finish_petting():
 	is_petting = false
 	$ProgressBar.value = 0
 	$ProgressBar.hide()
+	
+			
 
 func get_angry():
 	current_state = particleState.Sad
@@ -161,9 +163,7 @@ func exclusion_check(area):
 
 func _on_AudioStreamPlayer_finished():
 	is_playing_audio = false
-	match last_played_audio:
-		purr:
-			Global.pet_meter_current_value += Global.pet_meter_step
+	
 
 func _on_Cat_area_entered(area):
 	pass
