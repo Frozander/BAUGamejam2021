@@ -1,10 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Assets/Prefabs/HUD.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Fonts/IndieFlower-Regular.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Assets/Prefabs/MenuButton.tscn" type="PackedScene" id=3]
 
 [sub_resource type="DynamicFont" id=1]
-size = 12
+size = 9
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 2 )
@@ -17,14 +18,15 @@ __meta__ = {
 }
 
 [node name="HUD" parent="." instance=ExtResource( 1 )]
-position = Vector2( 0, 0 )
+position = Vector2( 13.0339, 5.46583 )
 
 [node name="AbilityLabel" type="Label" parent="."]
 anchor_top = 0.00294622
 anchor_bottom = 0.00294622
-margin_top = 36.2929
-margin_right = 208.0
-margin_bottom = 222.293
+margin_left = 18.807
+margin_top = 44.5997
+margin_right = 193.807
+margin_bottom = 193.6
 custom_fonts/font = SubResource( 1 )
 text = "Those are your abilities
 1 is \"meow\", you can meow to attract someone's attention, if they are close enough they will pet you.
@@ -37,13 +39,22 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Menu Button" parent="." instance=ExtResource( 3 )]
+margin_left = 155.0
+margin_top = 203.0
+margin_right = 278.0
+margin_bottom = 229.0
+load_scene_on_click = true
+scene_to_load = "res://Scenes/TitleScreen.tscn"
+label = "< Back to Menu"
+
 [node name="HUDLabel" type="Label" parent="."]
 anchor_top = 0.00294622
 anchor_bottom = 0.00294622
-margin_left = 210.718
-margin_top = 34.8787
-margin_right = 418.718
-margin_bottom = 241.879
+margin_left = 229.261
+margin_top = 45.6565
+margin_right = 403.261
+margin_bottom = 195.656
 custom_fonts/font = SubResource( 1 )
 text = "You can see how much time left before current day is finished.
 And there is your pet meter. each time someone pets you, your pet score will go up to a certain value. 
