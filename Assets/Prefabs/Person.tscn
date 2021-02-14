@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Assets/AnimatedSprites/Person5.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://Assets/Scripts/Person.gd" type="Script" id=2]
+[ext_resource path="res://Assets/AnimatedSprites/Person4.tres" type="SpriteFrames" id=4]
 
 [sub_resource type="RectangleShape2D" id=16]
 extents = Vector2( 18, 7 )
@@ -20,8 +20,8 @@ script = ExtResource( 2 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( -5.96046e-08, -5.96046e-08 )
 scale = Vector2( 1.5, 1.5 )
-frames = ExtResource( 1 )
-animation = "pet"
+frames = ExtResource( 4 )
+animation = "photo"
 
 [node name="BodyShape" type="CollisionShape2D" parent="."]
 position = Vector2( -1.98642, 53.4724 )

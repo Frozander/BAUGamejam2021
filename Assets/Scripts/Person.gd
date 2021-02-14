@@ -43,6 +43,7 @@ func _ready():
 	else:
 		$AnimatedSprite.frames = sprites[randi() % len(sprites)]
 	calc_move()
+		
 
 func _process(delta):	
 	delta_count += delta
@@ -100,17 +101,26 @@ func calc_coliders():
 		$BodyShape.position.x = 0
 		$PersonPetZone.hide()		
 		
+func make_photographer():
+	$AnimatedSprite.frames = photographer_sprite
+	is_photographer = true
+	calc_move()
+		
 func calc_move():
 	direction = rand_dir()
 	delta_count = 0
 	is_walking = rand_bool()
 	speed_x = .5
 	speed_y = SPEED_Y_REF[randi() % SPEED_Y_REF.size()]
+					
 	if is_walking:
 		idle()
 	else:
 		 walk()
 	
+	
+func take_photo():
+	$AnimatedSprite.play("photo")
 
 func rand_dir():
 	return pow(-1, randi() % 2);
@@ -123,7 +133,10 @@ func walk():
 	is_walking = true
 	
 func idle():
-	$AnimatedSprite.play("idle")
+	if is_photographer and (randi() % 3) < 2:
+		take_photo()
+	else:
+		$AnimatedSprite.play("idle")
 	is_walking = false
 
 func on_hear_meow(cat):
