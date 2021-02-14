@@ -15,8 +15,10 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Ayasofya The Game"
+config/name="The Cat of Hagia Sophia"
 run/main_scene="res://Scenes/TitleScreen.tscn"
+run/disable_stdout=true
+run/disable_stderr=true
 config/icon="res://icon.png"
 
 [autoload]
