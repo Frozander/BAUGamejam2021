@@ -50,6 +50,10 @@ func _process(delta):
 			self.position += movement			
 			self.scale = Vector2(direction, 1)
 
+		#50 needen becouse person's center not real center look 2d :/
+		self.z_index = $PersonBody.global_position.y + 50
+		$Label.text = String(self.z_index)
+		
 		if not self.cat:
 			return
 
@@ -63,7 +67,7 @@ func _process(delta):
 			else:
 				go_to_cat()
 		
-		self.z_index = $PersonBody.global_position.y
+		
 		
 		
 func calc_move():
