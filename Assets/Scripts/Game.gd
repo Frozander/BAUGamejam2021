@@ -1,28 +1,26 @@
 extends Node2D
 
+const PERSON = preload("res://Assets/Prefabs/Person.tscn")
+const Cooldown = preload("res://Assets/Scripts/Cooldown.gd")
+
 const ZONE_X = 210 #width of move zone
 const ZONE_Y = 40
 
 const PERSON_COUNT = 3
-
 const PERSON_HEARING_MEOW_LOWER_LIMIT = 60
 
 const PART_CHANGE_X_GAP = 70
 
 var rng = RandomNumberGenerator.new()
-
 var people = []
-
-const PERSON = preload("res://Assets/Prefabs/Person.tscn")
-
 var current_part = 1
+var meow_cooldown:Cooldown = Global.ability_cooldown_map["meow"]
 
 const BACKGROUNDS = [
 	preload("res://Assets/Images/Backgrounds/background_second_floor_pixelart.png"),
 	preload("res://Assets/Images/Backgrounds/background_first_floor_pixelart.png"),
 	preload("res://Assets/Images/Backgrounds/background_garden_pixelart.png")
 ]
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -33,7 +31,7 @@ func _physics_process(_delta):
 	sort_children($MoveZone)
 	
 func _unhandled_key_input(event):
-	if Input.is_action_pressed("ui_accept"):
+	if Input.is_action_pressed("meow") and meow_cooldown.is_ready():
 		on_cat_meow()
 
 func random_positon_in_move_zone():
@@ -59,7 +57,6 @@ func change_part(part):
 	$Backgound.texture = BACKGROUNDS[current_part]
 
 func on_cat_meow():
-	$MoveZone/Cat.play_audio()
 	var closest_person = find_closest_person_to_cat()
 	var dist = dist_between_cat_and_person(closest_person)
 	if dist < PERSON_HEARING_MEOW_LOWER_LIMIT:
@@ -107,8 +104,7 @@ func dist_between_cat_and_person(person):
 
 
 func _on_HUD_timeout():
-	Global.current_day += 1
-	get_tree().change_scene("res://Scenes/FadeIn.tscn")
+	Global.finish_day()
 
 func reset():
 	init_people()

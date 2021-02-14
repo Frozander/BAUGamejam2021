@@ -1,11 +1,9 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Fonts/IndieFlower-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Assets/Scripts/DayEnd.gd" type="Script" id=2]
-[ext_resource path="res://Assets/Images/Polaroids/1.jpg" type="Texture" id=3]
+[ext_resource path="res://Assets/Prefabs/Polaroid.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/Prefabs/MenuButton.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Assets/Images/polaroid_frame.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Images/polaroid_tape.png" type="Texture" id=6]
 [ext_resource path="res://Assets/Prefabs/CustomProgressBar.tscn" type="PackedScene" id=7]
 
 [sub_resource type="GDScript" id=1]
@@ -35,8 +33,6 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-day = 5
-percentage = 100
 
 [node name="Control" type="Control" parent="."]
 anchor_right = 1.0
@@ -115,23 +111,5 @@ load_scene_on_click = true
 scene_to_load = "res://Scenes/Game.tscn"
 label = "Next Day >"
 
-[node name="image" type="Sprite" parent="Control"]
-position = Vector2( 258.967, 74.4991 )
-rotation = -0.0872665
-scale = Vector2( 0.045, 0.045 )
-texture = ExtResource( 3 )
-
-[node name="polaroid_tape" type="Sprite" parent="Control/image"]
-position = Vector2( -29.23, -520.969 )
-rotation = 0.0872662
-scale = Vector2( 1.30274, 1.22535 )
-z_index = 15
-z_as_relative = false
-texture = ExtResource( 6 )
-
-[node name="polaroid_frame" type="Sprite" parent="Control/image"]
-position = Vector2( 2.8999, 98.6895 )
-rotation = -3.17061e-08
-scale = Vector2( 2.81986, 2.36722 )
-z_index = 10
-texture = ExtResource( 5 )
+[node name="image" parent="Control" instance=ExtResource( 3 )]
+[connection signal="pressed" from="Control/NextDayButton" to="." method="_on_NextDayButton_pressed"]

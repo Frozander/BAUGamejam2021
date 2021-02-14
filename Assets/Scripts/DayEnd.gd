@@ -1,18 +1,14 @@
 extends Control
 
-export(int) var day
-export(int) var percentage
-
-func _on_MainMenuButton_pressed():
-	get_tree().change_scene("res://Scenes/TitleScreen.tscn")
-
-func _on_ContinueButton_pressed():
-	get_tree().change_scene("res://Scenes/SceneOne.tscn")
-
 func _ready():
-	set_progress_percentage(percentage)
-	if percentage == 100:
+	var p = 100*(Global.pet_meter_current_value/Global.pet_meter_max_value)
+	p = min(p,100)
+	set_progress_percentage(p)
+	if p == 100:
 		set_polaroid()
+	if Global.current_day == Global.LAST_DAY:
+		$Control/NextDayButton.hide()
+		move_main_menu_button_to_center()
 
 func set_progress_percentage(score):
 	if score <= 1:
@@ -47,3 +43,11 @@ func resize_progress_to_normal_with():
 	$Control/ProgressBar.anchor_right = .4
 	$Control/ProgressBar.margin_right = 30
 
+func move_main_menu_button_to_center():
+	$Control/MainMenuButton.margin_left = 120
+	$Control/MainMenuButton.margin_right = 220
+	
+
+
+func _on_NextDayButton_pressed():
+	Global.go_to_next_day()

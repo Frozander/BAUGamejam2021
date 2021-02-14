@@ -16,6 +16,7 @@ var meow = preload("res://Assets/Sounds/meow.wav")
 var purr = preload("res://Assets/Sounds/purr.wav")
 var angry = preload("res://Assets/Sounds/angry.wav")
 
+var last_played_audio
 var is_petting = false
 
 # Called when the node enters the scene tree for the first time.
@@ -30,11 +31,10 @@ func _physics_process(_delta):
 		if Input.is_action_pressed("ui_left"): movement_vector += Vector2.LEFT
 		if Input.is_action_pressed("ui_right"): movement_vector += Vector2.RIGHT
 	
-	if Input.is_action_just_pressed("ui_select"):
-		play_audio(meow)
-#		$Particles2D.emitting = true
-#	else:
-#		$Particles2D.emitting = false
+	if Input.is_action_just_pressed("meow"):
+		on_meow()
+	elif Input.is_action_just_pressed("leave"):
+		on_leave()
 		
 	if movement_vector.x < 0:
 		$AnimatedSprite.flip_h = false
@@ -76,16 +76,17 @@ func _physics_process(_delta):
 			$Particles2D.set_texture(broken_heart)
 	
 	self.position += mov
+	$Label.text = String(self.z_index)
 
 func play_audio(stream = meow):
 	if !is_playing_audio:
 		is_playing_audio = true
 		$AudioStreamPlayer.stream = stream
 		$AudioStreamPlayer.play()
+		last_played_audio = stream
 
 func start_petting():
 	is_petting = true
-	
 	
 func finish_petting():
 	is_petting = false
@@ -94,7 +95,15 @@ func get_angry():
 	current_state = particleState.Sad
 	$Particles2D.emitting = true
 	play_audio(angry)
+
+func on_meow():
+	if Global.ability_cooldown_map["meow"].is_ready():
+		play_audio()
 	
+func on_leave():
+	if Global.ability_cooldown_map["leave"].is_ready():
+		$AudioStreamPlayer.stop()
+		finish_petting()
 
 func collide_with_person(person_area):
 	if global_position.x < person_area.global_position.x:
@@ -119,6 +128,9 @@ func exclusion_check(area):
 
 func _on_AudioStreamPlayer_finished():
 	is_playing_audio = false
+	match last_played_audio:
+		purr:
+			Global.pet_meter_current_value += Global.pet_meter_step
 
 func _on_Cat_area_entered(area):
 	pass

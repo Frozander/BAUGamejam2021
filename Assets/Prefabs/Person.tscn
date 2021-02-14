@@ -9,55 +9,55 @@ region = Rect2( 192, 162, 64, 81 )
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 1 )
-region = Rect2( 384, 162, 64, 81 )
+region = Rect2( 0, 81, 64, 81 )
 
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 1 )
-region = Rect2( 448, 162, 64, 81 )
+region = Rect2( 64, 81, 64, 81 )
 
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 1 )
-region = Rect2( 0, 81, 64, 81 )
+region = Rect2( 128, 81, 64, 81 )
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 1 )
-region = Rect2( 64, 81, 64, 81 )
+region = Rect2( 192, 81, 64, 81 )
 
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 1 )
-region = Rect2( 128, 81, 64, 81 )
+region = Rect2( 256, 81, 64, 81 )
 
 [sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 1 )
-region = Rect2( 192, 81, 64, 81 )
+region = Rect2( 320, 81, 64, 81 )
 
 [sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 1 )
-region = Rect2( 256, 81, 64, 81 )
+region = Rect2( 384, 81, 64, 81 )
 
 [sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 1 )
-region = Rect2( 320, 81, 64, 81 )
+region = Rect2( 448, 81, 64, 81 )
 
 [sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 1 )
-region = Rect2( 384, 81, 64, 81 )
+region = Rect2( 0, 162, 64, 81 )
 
 [sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 1 )
-region = Rect2( 448, 81, 64, 81 )
+region = Rect2( 64, 162, 64, 81 )
 
 [sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 1 )
-region = Rect2( 0, 162, 64, 81 )
+region = Rect2( 128, 162, 64, 81 )
 
 [sub_resource type="AtlasTexture" id=13]
 atlas = ExtResource( 1 )
-region = Rect2( 64, 162, 64, 81 )
+region = Rect2( 384, 162, 64, 81 )
 
 [sub_resource type="AtlasTexture" id=14]
 atlas = ExtResource( 1 )
-region = Rect2( 128, 162, 64, 81 )
+region = Rect2( 448, 162, 64, 81 )
 
 [sub_resource type="SpriteFrames" id=15]
 animations = [ {
@@ -66,15 +66,15 @@ animations = [ {
 "name": "idle",
 "speed": 0.0
 }, {
-"frames": [ SubResource( 2 ), SubResource( 3 ) ],
-"loop": true,
-"name": "pet",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ],
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ],
 "loop": true,
 "name": "walk",
 "speed": 9.0
+}, {
+"frames": [ SubResource( 13 ), SubResource( 14 ) ],
+"loop": true,
+"name": "pet",
+"speed": 5.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=16]
@@ -112,5 +112,15 @@ shape = SubResource( 17 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PersonBody"]
 position = Vector2( -0.66819, 53.4539 )
 shape = SubResource( 18 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = -16.764
+margin_top = -67.8201
+margin_right = 21.236
+margin_bottom = -53.8201
+text = "sad"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="area_entered" from="." to="." method="_on_Person_area_entered"]
 [connection signal="area_entered" from="PersonPetZone" to="." method="_on_PetZone_area_entered"]
