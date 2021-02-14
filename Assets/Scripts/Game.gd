@@ -161,15 +161,15 @@ func on_person_hit_wall(person):
 	else:
 		move_person_to_another_part(person,person.part_index-1)		
 		
-func move_person_to_another_part(person,part):
-	people[person.part_index].erase(person)
+func move_person_to_another_part(person,new_part):
+	people[current_part].erase(person)
 	$MoveZone.remove_child(person)
-	person.part_index = part
-	people[person.part_index].append(person)
+	person.part_index = new_part
+	people[new_part].append(person)
 	if person.is_last_hitted_wall_right:
-		person.position.x = 0
+		person.position.x = -(ZONE_X - 30)
 	else:
-		person.position.x = 2*ZONE_X
+		person.position.x = +(ZONE_X - 30)
 
 func init_enemy_cat():
 	enemy_cat = ENEMY_CAT.instance()
