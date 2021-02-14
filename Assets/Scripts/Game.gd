@@ -119,10 +119,37 @@ func init_people():
 		for p in PERSON_COUNT:
 			var person = PERSON.instance()
 			person.current_index = p
+			person.part_index = i
 			var rand = random_positon_in_move_zone();
 			person.position.x += rand[0]
 			person.position.y += rand[1]
 			people[i].append(person)
+	listen_people_hit_wall()
+	
+func listen_people_hit_wall():
+	for i in len(people):
+		for p in people[i]:
+			p.connect("hit_wall",self, "on_person_hit_wall")
+
+func on_person_hit_wall(person):
+	if person.is_last_hitted_wall_right == true and person.part_index == 2:
+		return
+	if not person.is_last_hitted_wall_right == true and person.part_index == 0:
+		return
+	if person.is_last_hitted_wall_right:
+		move_person_to_another_part(person,person.part_index+1)
+	else:
+		move_person_to_another_part(person,person.part_index-1)		
+		
+func move_person_to_another_part(person,part):
+	people[person.part_index].erase(person)
+	$MoveZone.remove_child(person)
+	person.part_index = part
+	people[person.part_index].append(person)
+	if person.is_last_hitted_wall_right:
+		person.position.x = 0
+	else:
+		person.position.x = ZONE_X - 20
 
 func sort_children(node):
 	var children = node.get_children()

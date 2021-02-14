@@ -1,5 +1,7 @@
 extends Area2D
 
+signal hit_wall
+
 const Cat = preload("res://Assets/Scripts/Cat.gd")
 const SPEED_Y_REF = [.25,0,0,0,-.25]
 const MAX_CAT_FOLLOWING_DISTANCE = 125
@@ -18,6 +20,8 @@ var is_waiting_cat = false
 var is_petting_cat = false
 var is_petted_cat = false
 var cat: Cat
+var part_index:int
+var is_last_hitted_wall_right: bool
 
 
 var sprites = [
@@ -25,7 +29,7 @@ var sprites = [
 	preload("res://Assets/AnimatedSprites/Person2.tres"),
 	preload("res://Assets/AnimatedSprites/Person3.tres"),	
 	preload("res://Assets/AnimatedSprites/Person5.tres"),	
-	]
+]
  
 var photographer_sprite = preload("res://Assets/AnimatedSprites/Person4.tres")
 
@@ -192,15 +196,11 @@ func exclusion_check(area):
 				movement.y = 0
 				lastColidedArea = area
 		"LeftExclusion":
-			if movement.x < 0:
-				movement.x *= -1
-				direction *= -1
-				lastColidedArea = area
+			is_last_hitted_wall_right = false
+			emit_signal("hit_wall",self)
 		"RightExclusion":
-			if movement.x > 0:
-				movement.x *= -1
-				direction *= -1
-				lastColidedArea = area
+			is_last_hitted_wall_right = true
+			emit_signal("hit_wall",self)
 
 func collide_with_person(person_area):
 	if person_area != lastColidedArea:
