@@ -176,7 +176,20 @@ func init_enemy_cat():
 	enemy_cat = ENEMY_CAT.instance()
 	var random_pos = random_positon_in_move_zone()
 	enemy_cat.position = Vector2(random_pos[0], random_pos[1])
+	enemy_cat.current_part = current_part
+	enemy_cat.connect("hit_wall",self,"change_enemy_cat_part")
 
+func change_enemy_cat_part():
+	if enemy_cat.is_last_hitted_wall_right and current_part == 2:
+		return
+	if not enemy_cat.is_last_hitted_wall_right and current_part == 0:
+		return
+	if enemy_cat.is_last_hitted_wall_right:
+		move_enemy_cat_to_part(current_part + 1)
+	else:
+		move_enemy_cat_to_part(current_part - 1)
+	$MoveZone.remove_child(enemy_cat)
+	
 func move_enemy_cat_to_part(part):
 	var direction = enemy_cat.current_part - part
 	if direction > 0:
@@ -185,7 +198,6 @@ func move_enemy_cat_to_part(part):
 		enemy_cat.position.x = -ZONE_X
 	
 	enemy_cat.current_part = part
-	
 	$MoveZone.add_child(enemy_cat)
 
 func start_enemy_return_timer():
