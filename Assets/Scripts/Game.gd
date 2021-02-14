@@ -7,7 +7,7 @@ const Cooldown = preload("res://Assets/Scripts/Cooldown.gd")
 const ZONE_X = 210 #width of move zone
 const ZONE_Y = 40
 
-const PERSON_COUNT = 1
+const PERSON_COUNT = 3
 const PERSON_HEARING_MEOW_LOWER_LIMIT = 60
 
 const PART_CHANGE_X_GAP = 70
@@ -167,10 +167,7 @@ func move_person_to_another_part(person,new_part):
 	$MoveZone.remove_child(person)
 	person.part_index = new_part
 	people[new_part].append(person)
-	if person.is_last_hitted_wall_right:
-		person.position.x = -(ZONE_X - 30)
-	else:
-		person.position.x = +(ZONE_X - 30)
+	person.position.x = random_positon_in_move_zone()[0]
 
 func init_enemy_cat():
 	enemy_cat = ENEMY_CAT.instance()
@@ -184,10 +181,11 @@ func change_enemy_cat_part():
 		return
 	if not enemy_cat.is_last_hitted_wall_right and current_part == 0:
 		return
+	enemy_cat.position.x = random_positon_in_move_zone()[0]
 	if enemy_cat.is_last_hitted_wall_right:
-		move_enemy_cat_to_part(current_part + 1)
+		enemy_cat.current_part = current_part + 1
 	else:
-		move_enemy_cat_to_part(current_part - 1)
+		enemy_cat.current_part = current_part - 1
 	$MoveZone.remove_child(enemy_cat)
 	
 func move_enemy_cat_to_part(part):
