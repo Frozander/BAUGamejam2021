@@ -18,6 +18,8 @@ var enemy_cat = null
 var current_part = 1
 var meow_cooldown:Cooldown = Global.ability_cooldown_map["meow"]
 
+var photographer = null
+
 const BACKGROUNDS = [
 	preload("res://Assets/Images/Backgrounds/background_second_floor_pixelart.png"),
 	preload("res://Assets/Images/Backgrounds/background_first_floor_pixelart.png"),
@@ -33,6 +35,20 @@ func _physics_process(_delta):
 	# sort_children($MoveZone)
 	if get_node_or_null("MoveZone/EnemyCat"):
 		stop_enemy_return_timer()
+		
+	if Input.is_action_just_pressed("pose"):
+		if Global.ability_cooldown_map["pose"].is_ready():
+			$MoveZone/Cat.on_pose()
+			for p in len(people[current_part]):
+				if photographer == people[current_part][p]:
+					if photographer.is_taking_photo and Global.pet_meter_current_value == Global.pet_meter_max_value:
+						Global.take_photo_and_finish_day()
+#						var photo_look_right = photographer.direction == 1
+#						var cat_look_right = $MoveZone/Cat/AnimatedSprite.flip_h == true
+#						var cat_at_right = photographer.position.x < $MoveZone/Cat.position.x
+#						if (cat_at_right && photo_look_right and !cat_look_right) or (!cat_at_right and !photo_look_right and cat_look_right):
+#							Global.take_photo_and_finish_day()
+			
 
 func _unhandled_key_input(event):
 	if Input.is_action_pressed("meow") and meow_cooldown.is_ready():
@@ -140,7 +156,9 @@ func init_people():
 			person.part_index = i
 			if is_photo:
 				person.make_photographer()
+				photographer = person
 #			person.current_index = p
+			
 			var rand = random_positon_in_move_zone();
 			person.position.x += rand[0]
 			person.position.y += rand[1]

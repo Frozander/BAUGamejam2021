@@ -4,7 +4,7 @@ func _ready():
 	var p = 100*(Global.pet_meter_current_value/Global.pet_meter_max_value)
 	p = min(p,100)
 	set_progress_percentage(p)
-	if p == 100:
+	if Global.is_last_day_photo_taken:
 		set_polaroid()
 	if Global.current_day == Global.LAST_DAY:
 		$Control/NextDayButton.hide()
@@ -17,7 +17,7 @@ func set_progress_percentage(score):
 	$Control/PercentageLabel.text = str(score) + "% Completed"
 	if score > 100 or score < 0:
 		print("set_progress_percentage recived out of range score")
-	if score == 100:
+	if Global.is_last_day_photo_taken:
 		show_photo_taken()
 		resize_progress_to_normal_with()
 	else:
