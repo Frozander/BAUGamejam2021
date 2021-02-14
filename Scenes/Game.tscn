@@ -21,7 +21,7 @@ script = ExtResource( 3 )
 position = Vector2( 0, 0 )
 
 [node name="Backgound" type="Sprite" parent="."]
-position = Vector2( 227.854, 136.228 )
+position = Vector2( 228.354, 136.228 )
 scale = Vector2( 0.286086, 0.286086 )
 z_index = -1000
 texture = ExtResource( 1 )
