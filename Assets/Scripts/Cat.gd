@@ -31,8 +31,8 @@ func _physics_process(_delta):
 		if Input.is_action_pressed("ui_left"): movement_vector += Vector2.LEFT
 		if Input.is_action_pressed("ui_right"): movement_vector += Vector2.RIGHT
 	
-	if Input.is_action_just_pressed("ui_select"):
-		play_audio(meow)
+	if Input.is_action_just_pressed("meow"):
+		on_meow()
 #		$Particles2D.emitting = true
 #	else:
 #		$Particles2D.emitting = false
@@ -97,7 +97,9 @@ func get_angry():
 	current_state = particleState.Sad
 	$Particles2D.emitting = true
 	play_audio(angry)
-	
+
+func on_meow():
+	play_audio()	
 
 func collide_with_person(person_area):
 	if global_position.x < person_area.global_position.x:
