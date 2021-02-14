@@ -7,7 +7,7 @@ const Cooldown = preload("res://Assets/Scripts/Cooldown.gd")
 const ZONE_X = 210 #width of move zone
 const ZONE_Y = 40
 
-const PERSON_COUNT = 3
+const PERSON_COUNT = 4
 const PERSON_HEARING_MEOW_LOWER_LIMIT = 60
 
 const PART_CHANGE_X_GAP = 70
@@ -171,16 +171,16 @@ func listen_people_hit_wall():
 			p.connect("hit_wall",self, "on_person_hit_wall")
 
 func on_person_hit_wall(person):
-	if person.is_last_hitted_wall_right and current_part == 2:
+	if person.is_last_hitted_wall_right or current_part == 2:
 		person.calc_move()
 		return
-	if not person.is_last_hitted_wall_right and current_part == 0:
+	if not person.is_last_hitted_wall_right or current_part == 0:
 		person.calc_move()
 		return
 	if person.is_last_hitted_wall_right:
-		move_person_to_another_part(person,(person.part_index+1 ) )
+		move_person_to_another_part(person, person.part_index+1 )
 	else:
-		move_person_to_another_part(person,(person.part_index-1 ))		
+		move_person_to_another_part(person, person.part_index-1)	
 		
 func move_person_to_another_part(person,new_part):
 	people[current_part].erase(person)

@@ -229,23 +229,19 @@ func collide_with_person(person_area):
 	if person_area != lastColidedArea:
 		if global_position.x < person_area.global_position.x:
 			if movement.x > 0:
-				movement.x *= -1 
-				direction *= -1
+				calc_move()
 				lastColidedArea = person_area
 		if global_position.x > person_area.global_position.x:
 			if movement.x:
-				movement.x *= -1
-				direction *= -1
+				calc_move()
 				lastColidedArea = person_area
 		if global_position.y < person_area.global_position.y:
 			if movement.y:
-				movement.y *= -1
-				direction *= -1
+				calc_move()
 				lastColidedArea = person_area
 		if global_position.y > person_area.global_position.y:
 			if movement.y:
-				movement.y *= -1
-				direction *= -1
+				calc_move()
 				lastColidedArea = person_area
 
 func _on_Person_area_entered(area):
