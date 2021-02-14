@@ -20,8 +20,8 @@ script = ExtResource( 2 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( -5.96046e-08, -5.96046e-08 )
 scale = Vector2( 1.5, 1.5 )
-frames = ExtResource( 1 )
-animation = "idle"
+frames = ExtResource( 4 )
+animation = "photo"
 
 [node name="BodyShape" type="CollisionShape2D" parent="."]
 position = Vector2( -1.98642, 53.4724 )
