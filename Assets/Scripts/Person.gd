@@ -126,7 +126,6 @@ func calc_move():
 	else:
 		 walk()
 	
-	
 func take_photo():
 	$AnimatedSprite.play("photo")
 
