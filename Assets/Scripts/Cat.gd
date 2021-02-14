@@ -21,6 +21,7 @@ var is_petting = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	start_petting()
 	pass
 
 func _physics_process(_delta):
@@ -104,6 +105,10 @@ func on_leave():
 	if Global.ability_cooldown_map["leave"].is_ready():
 		$AudioStreamPlayer.stop()
 		finish_petting()
+
+func hit():
+	print("I got hit")
+	finish_petting()
 
 func collide_with_person(person_area):
 	if global_position.x < person_area.global_position.x:
