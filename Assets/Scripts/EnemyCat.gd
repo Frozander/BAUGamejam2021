@@ -3,6 +3,8 @@ extends Area2D
 enum particleState {Happy, Sad, Meow, Attack}
 enum enemyState { Patrol, Alert, Attack, Flee}
 
+signal hit_wall
+
 export(float) var speed = 1
 export var run_multiplier = 2
 
@@ -20,6 +22,8 @@ var broken_heart = preload("res://Assets/Sprites/broken_heart.png")
 var meow = preload("res://Assets/Sounds/meow.wav")
 var purr = preload("res://Assets/Sounds/purr.wav")
 var angry = preload("res://Assets/Sounds/angry.wav")
+
+var is_last_hitted_wall_right:bool
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -132,9 +136,11 @@ func exclusion_check(area):
 		"BottomExclusion":
 			movement_vector.y = 0 if movement_vector.y > 0 else movement_vector.y
 		"LeftExclusion":
-			movement_vector.x = 0 if movement_vector.x < 0 else movement_vector.x
+			is_last_hitted_wall_right = false
+			emit_signal("hit_wall")
 		"RightExclusion":
-			movement_vector.x = 0 if movement_vector.x > 0 else movement_vector.x
+			is_last_hitted_wall_right = true
+			emit_signal("hit_wall")
 
 func _on_AudioStreamPlayer_finished():
 	is_playing_audio = false
