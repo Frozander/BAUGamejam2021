@@ -65,7 +65,9 @@ func _process(delta):
 		
 		self.z_index = $PersonBody.global_position.y
 		
-		
+	if Input.is_action_just_pressed("leave"):
+		end_petting()
+
 func calc_move():
 	direction = rand_dir()
 	delta_count = 0
