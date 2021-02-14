@@ -87,9 +87,13 @@ func play_audio(stream = meow):
 
 func start_petting():
 	is_petting = true
+	$ProgressBar.value = 0
+	$ProgressBar.show()
 	
 func finish_petting():
 	is_petting = false
+	$ProgressBar.value = 0
+	$ProgressBar.hide()
 
 func get_angry():
 	current_state = particleState.Sad
@@ -104,6 +108,9 @@ func on_leave():
 	if Global.ability_cooldown_map["leave"].is_ready():
 		$AudioStreamPlayer.stop()
 		finish_petting()
+
+func update_petting_percentage(per):
+	$ProgressBar.value = per
 
 func hit():
 	print("I got hit")

@@ -1,5 +1,6 @@
 extends Area2D
 
+const Cat = preload("res://Assets/Scripts/Cat.gd")
 const SPEED_Y_REF = [.25,0,0,0,-.25]
 const MAX_CAT_FOLLOWING_DISTANCE = 125
 const PETTING_DURATIONS = [3,5,7]
@@ -16,7 +17,7 @@ var is_going_to_cat = false
 var is_waiting_cat = false
 var is_petting_cat = false
 var is_petted_cat = false
-var cat: Node2D
+var cat: Cat
 
 
 var sprites = [
@@ -50,6 +51,8 @@ func _process(delta):
 	if is_petting_cat:
 		if delta_count > petting_duration:
 			end_petting()
+		else:
+			cat.update_petting_percentage(100*delta_count/petting_duration)
 	else:
 		if delta_count > 3 and not is_going_to_cat and not is_waiting_cat:
 			calc_move()
