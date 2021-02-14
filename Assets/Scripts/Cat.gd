@@ -21,7 +21,6 @@ var is_petting = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	start_petting()
 	pass
 
 func _physics_process(_delta):
