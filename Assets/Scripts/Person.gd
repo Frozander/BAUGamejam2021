@@ -17,7 +17,19 @@ var is_waiting_cat = false
 var is_petting_cat = false
 var is_petted_cat = false
 var cat: Node2D
+
+
+var sprites = [
+	preload("res://Assets/AnimatedSprites/Person.tres"),
+	preload("res://Assets/AnimatedSprites/Person2.tres"),
+	preload("res://Assets/AnimatedSprites/Person3.tres"),	
+	preload("res://Assets/AnimatedSprites/Person5.tres"),	
+	]
  
+var photographer_sprite = preload("res://Assets/AnimatedSprites/Person4.tres")
+
+var is_photographer = false
+
 var movement = Vector2()
 
 var petting_duration = 3
@@ -26,6 +38,10 @@ var lastColidedArea = null
 
 func _ready():
 	delta_count = rand_range(-2,2)
+	if is_photographer:
+		$AnimatedSprite.frames = photographer_sprite
+	else:
+		$AnimatedSprite.frames = sprites[randi() % len(sprites)]
 	calc_move()
 
 func _process(delta):	
