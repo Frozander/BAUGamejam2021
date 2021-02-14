@@ -187,6 +187,7 @@ func end_petting():
 	is_petted_cat = true
 	is_waiting_cat = false
 	is_going_to_cat = false
+	Global.pet_meter_current_value += delta_count
 	calc_move()
 	delta_count = 0
 	self.cat.finish_petting()
