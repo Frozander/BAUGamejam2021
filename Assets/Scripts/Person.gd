@@ -22,7 +22,7 @@ var movement = Vector2()
 
 var petting_duration = 3
 
-
+var lastColidedArea = null
 
 func _ready():
 	delta_count = rand_range(-2,2)
@@ -43,12 +43,12 @@ func _process(delta):
 			movement.y = speed_y * direction
 			var areas = get_overlapping_areas()
 			for area in areas:
-				if "Person" in area.name:
+				if area.name == "PersonBody" or area.name == "CatBody":
 					collide_with_person(area)
 				else:
 					exclusion_check(area)
-			self.position += movement
-			self.z_index = $BodyShape.position.y
+			self.position += movement			
+			self.scale = Vector2(direction, 1)
 
 		if not self.cat:
 			return
@@ -63,6 +63,8 @@ func _process(delta):
 			else:
 				go_to_cat()
 		
+		self.z_index = $PersonBody.global_position.y
+		
 		
 func calc_move():
 	direction = rand_dir()
@@ -74,7 +76,7 @@ func calc_move():
 		idle()
 	else:
 		 walk()
-	self.scale = Vector2(direction, 1)
+	
 
 func rand_dir():
 	return pow(-1, randi() % 2);
@@ -145,23 +147,46 @@ func stop_following_cat():
 func exclusion_check(area):
 	match area.name:
 		"TopExclusion":
-			movement.y = 0 if movement.y < 0 else movement.y
+			if movement.y < 0:
+				movement.y = 0
+				lastColidedArea = area
 		"BottomExclusion":
-			movement.y = 0 if movement.y > 0 else movement.y
+			if movement.y > 0:
+				movement.y = 0
+				lastColidedArea = area
 		"LeftExclusion":
-			movement.x = 0 if movement.x < 0 else movement.x
+			if movement.x < 0:
+				movement.x *= -1
+				direction *= -1
+				lastColidedArea = area
 		"RightExclusion":
-			movement.x = 0 if movement.x > 0 else movement.x
+			if movement.x > 0:
+				movement.x *= -1
+				direction *= -1
+				lastColidedArea = area
 
 func collide_with_person(person_area):
-	if global_position.x < person_area.global_position.x:
-		movement.x = 0 if movement.x > 0 else movement.x
-	if global_position.x > person_area.global_position.x:
-		movement.x = 0 if movement.x < 0 else movement.x
-	if global_position.y < person_area.global_position.y:
-		movement.y = 0 if movement.y > 0 else movement.y
-	if global_position.y > person_area.global_position.y:
-		movement.y = 0 if movement.y < 0 else movement.y
+	if person_area != lastColidedArea:
+		if global_position.x < person_area.global_position.x:
+			if movement.x > 0:
+				movement.x *= -1 
+				direction *= -1
+				lastColidedArea = person_area
+		if global_position.x > person_area.global_position.x:
+			if movement.x:
+				movement.x *= -1
+				direction *= -1
+				lastColidedArea = person_area
+		if global_position.y < person_area.global_position.y:
+			if movement.y:
+				movement.y *= -1
+				direction *= -1
+				lastColidedArea = person_area
+		if global_position.y > person_area.global_position.y:
+			if movement.y:
+				movement.y *= -1
+				direction *= -1
+				lastColidedArea = person_area
 
 func _on_Person_area_entered(area):
 #	print("Person Area Entered: %s" % area.name)
