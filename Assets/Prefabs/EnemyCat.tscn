@@ -7,7 +7,7 @@
 [ext_resource path="res://Assets/Sounds/meow.wav" type="AudioStream" id=5]
 [ext_resource path="res://Assets/Sprites/heart.png" type="Texture" id=6]
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 14, 2 )
 
 [sub_resource type="ShaderMaterial" id=2]
@@ -19,18 +19,17 @@ shader_param/modulate = null
 collision_layer = 2
 collision_mask = 3
 script = ExtResource( 2 )
-speed = null
-run_multiplier = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 10 )
-shape = SubResource( 3 )
+shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 material = SubResource( 2 )
 scale = Vector2( 1.5, 1.5 )
 frames = ExtResource( 1 )
 animation = "idle"
+frame = 3
 playing = true
 __meta__ = {
 "_edit_lock_": true

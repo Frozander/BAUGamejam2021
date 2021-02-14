@@ -48,7 +48,6 @@ func _process(delta):
 				else:
 					exclusion_check(area)
 			self.position += movement
-			self.z_index = $BodyShape.position.y
 
 		if not self.cat:
 			return
