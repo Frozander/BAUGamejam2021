@@ -12,7 +12,7 @@ var pet_meter_max_value = 100.0
 
 var ability_cooldown_map = {
 	"meow": Cooldown.new(3.0),
-	"pose": Cooldown.new(40.0),
+	"pose": Cooldown.new(10.0),
 	"leave": Cooldown.new(5.0)
 }
 

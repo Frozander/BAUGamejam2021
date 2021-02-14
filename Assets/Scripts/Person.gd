@@ -23,6 +23,7 @@ var cat: Cat
 var part_index:int
 var is_last_hitted_wall_right: bool
 
+var is_taking_photo = false
 
 var sprites = [
 	preload("res://Assets/AnimatedSprites/Person.tres"),
@@ -119,7 +120,7 @@ func calc_move():
 	is_walking = rand_bool()
 	speed_x = .5
 	speed_y = SPEED_Y_REF[randi() % SPEED_Y_REF.size()]
-					
+	is_taking_photo = false
 	if is_walking:
 		idle()
 	else:
@@ -142,12 +143,13 @@ func walk():
 func idle():
 	if is_photographer and (randi() % 3) < 2:
 		take_photo()
+		is_taking_photo = true
 	else:
 		$AnimatedSprite.play("idle")
 	is_walking = false
 
 func on_hear_meow(cat):
-	if not is_petted_cat:
+	if not is_petted_cat and not is_photographer:
 		is_going_to_cat = true
 		self.cat = cat
 		face_to_cat()

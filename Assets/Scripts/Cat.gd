@@ -18,23 +18,34 @@ var angry = preload("res://Assets/Sounds/angry.wav")
 
 var last_played_audio
 var is_petting = false
+var is_posing = false
+const POSING_DURATION = 5
 
+var delta_count = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
 
 func _physics_process(_delta):
+	delta_count += _delta
+	if is_posing and delta_count > POSING_DURATION:
+		is_posing = false
+	
 	movement_vector = Vector2(0, 0)
-	if is_petting == false:
+	if not is_petting and not is_posing:
 		if Input.is_action_pressed("ui_up"): movement_vector += Vector2.UP
 		if Input.is_action_pressed("ui_down"): movement_vector += Vector2.DOWN
 		if Input.is_action_pressed("ui_left"): movement_vector += Vector2.LEFT
 		if Input.is_action_pressed("ui_right"): movement_vector += Vector2.RIGHT
+		
+	
 	
 	if Input.is_action_just_pressed("meow"):
 		on_meow()
 	elif Input.is_action_just_pressed("leave"):
 		on_leave()
+	elif Input.is_action_just_pressed("pose"):
+		on_pose()
 		
 	if movement_vector.x < 0:
 		$AnimatedSprite.flip_h = false
@@ -60,6 +71,8 @@ func _physics_process(_delta):
 			play_audio(purr)
 			current_state = particleState.Happy
 			$Particles2D.emitting = true
+			$AnimatedSprite.play('sit')
+		elif is_posing:
 			$AnimatedSprite.play('sit')
 		else:
 			$AnimatedSprite.play('idle')
@@ -108,6 +121,12 @@ func on_leave():
 	if Global.ability_cooldown_map["leave"].is_ready():
 		$AudioStreamPlayer.stop()
 		finish_petting()
+func on_pose():
+	if Global.ability_cooldown_map["pose"].is_ready():
+		is_posing = true
+		delta_count = 0
+		movement_vector = Vector2(0,0)
+		$AudioStreamPlayer.stop()
 
 func update_petting_percentage(per):
 	$ProgressBar.value = per
