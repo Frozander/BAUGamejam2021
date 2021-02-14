@@ -26,16 +26,24 @@ var DAY_IMAGE_MAP = {
 
 var taken_image_keys = []
 
+func start_game():
+	reset_pet_meter_values()
+	if current_day == LAST_DAY:
+		current_day = 0
+	go_to_next_day()
+
 func get_current_day_image():
 	return DAY_IMAGE_MAP[current_day]
 
 func take_photo_and_finish_day():
-	pet_meter_current_value = pet_meter_max_value
-	get_tree().change_scene("res://Scenes/FadeIn.tscn")
-
-func go_to_next_day():
-	if is_image_taken():
+	if not taken_image_keys.has(current_day):
 		taken_image_keys.append(current_day)
+	finish_day()
+
+func finish_day():
+	get_tree().change_scene("res://Scenes/FadeIn.tscn")
+	
+func go_to_next_day():
 	reset_cooldowns()
 	reset_pet_meter_values()
 	current_day += 1
@@ -43,9 +51,6 @@ func go_to_next_day():
 func reset_cooldowns():
 	for c in ability_cooldown_map.values():
 		c.reset()
-
-func is_image_taken():
-	return pet_meter_current_value >= pet_meter_max_value
 
 func reset_pet_meter_values():
 	pet_meter_current_value = 0.0

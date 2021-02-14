@@ -47,3 +47,7 @@ func move_main_menu_button_to_center():
 	$Control/MainMenuButton.margin_left = 120
 	$Control/MainMenuButton.margin_right = 220
 	
+
+
+func _on_NextDayButton_pressed():
+	Global.go_to_next_day()
