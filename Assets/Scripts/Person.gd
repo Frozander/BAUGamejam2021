@@ -141,7 +141,7 @@ func walk():
 	is_walking = true
 	
 func idle():
-	if is_photographer and (randi() % 3) < 2:
+	if is_photographer:
 		take_photo()
 		is_taking_photo = true
 	else:
