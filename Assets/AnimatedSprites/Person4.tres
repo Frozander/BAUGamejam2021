@@ -72,7 +72,7 @@ animations = [ {
 "frames": [ SubResource( 64 ), SubResource( 65 ), SubResource( 66 ), SubResource( 67 ), SubResource( 68 ), SubResource( 69 ), SubResource( 70 ), SubResource( 71 ), SubResource( 72 ), SubResource( 73 ), SubResource( 74 ) ],
 "loop": true,
 "name": "walk",
-"speed": 5.0
+"speed": 9.0
 }, {
 "frames": [ SubResource( 75 ), SubResource( 76 ) ],
 "loop": true,
