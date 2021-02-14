@@ -101,15 +101,15 @@ func move_person(area, dir = 1):
 func find_closest_person_to_cat():
 	if len(people[current_part]) > 0:
 		var closest_person_to_cat = people[current_part][0]
-    var min_dist = dist_between_cat_and_person(closest_person_to_cat)
-    for person in people[current_part]:
-      if person.is_photographer:
-        continue
-      var dist = dist_between_cat_and_person(person)
-      if dist < min_dist:
-        closest_person_to_cat = person
-        min_dist = dist
-    return closest_person_to_cat
+		var min_dist = dist_between_cat_and_person(closest_person_to_cat)
+		for person in people[current_part]:
+			if person.is_photographer:
+				continue
+			var dist = dist_between_cat_and_person(person)
+			if dist < min_dist:
+				closest_person_to_cat = person
+				min_dist = dist
+		return closest_person_to_cat
 
 func dist_between_cat_and_person(person):
 	var diff = person.position - $MoveZone/Cat.position

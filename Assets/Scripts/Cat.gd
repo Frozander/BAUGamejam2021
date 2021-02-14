@@ -129,10 +129,6 @@ func on_pose():
 		movement_vector = Vector2(0,0)
 		$AudioStreamPlayer.stop()
 
-func on_pose():
-	if Global.ability_cooldown_map["pose"].is_ready():
-		is_posing = true
-
 func update_petting_percentage(per):
 	$ProgressBar.value = per
 
