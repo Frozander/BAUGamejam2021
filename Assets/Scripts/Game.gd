@@ -82,6 +82,8 @@ func change_part(part):
 
 func on_cat_meow():
 	var closest_person = find_closest_person_to_cat()
+	if not closest_person:
+		return
 	var dist = dist_between_cat_and_person(closest_person)
 	if dist < PERSON_HEARING_MEOW_LOWER_LIMIT:
 		closest_person.on_hear_meow($MoveZone/Cat)
