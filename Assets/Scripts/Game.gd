@@ -172,9 +172,9 @@ func listen_people_hit_wall():
 
 func on_person_hit_wall(person):
 	if person.is_last_hitted_wall_right:
-		move_person_to_another_part(person,(person.part_index+1) % 3)
+		move_person_to_another_part(person,(person.part_index+1 + 3) % 3)
 	else:
-		move_person_to_another_part(person,(person.part_index-1 )% 3)		
+		move_person_to_another_part(person,(person.part_index-1 + 3)% 3)		
 		
 func move_person_to_another_part(person,new_part):
 	people[current_part].erase(person)
