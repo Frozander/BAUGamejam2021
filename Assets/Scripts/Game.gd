@@ -54,7 +54,6 @@ func change_part(part):
 	$Backgound.texture = BACKGROUNDS[current_part]
 
 func on_cat_meow():
-	$MoveZone/Cat.play_audio()
 	var closest_person = find_closest_person_to_cat()
 	var dist = dist_between_cat_and_person(closest_person)
 	if dist < PERSON_HEARING_MEOW_LOWER_LIMIT:
