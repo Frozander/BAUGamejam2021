@@ -133,8 +133,9 @@ func update_petting_percentage(per):
 	$ProgressBar.value = per
 
 func hit():
-	print("I got hit")
-	finish_petting()
+	#if is petting person will handle all this case for not petting
+	if not is_petting and Global.pet_meter_current_value > Global.pet_attack_penalty:
+		Global.pet_meter_current_value -= Global.pet_attack_penalty
 
 func collide_with_person(person_area):
 	var collision = false
