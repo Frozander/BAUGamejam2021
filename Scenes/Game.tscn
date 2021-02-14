@@ -73,6 +73,10 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BottomExclusion"]
 position = Vector2( 223.017, 248.974 )
 shape = SubResource( 3 )
+
+[node name="EnemyTimer" type="Timer" parent="."]
+one_shot = true
 [connection signal="timeout" from="HUD" to="." method="_on_HUD_timeout"]
 [connection signal="area_entered" from="RightExclusion" to="." method="_on_RightPort_area_entered"]
 [connection signal="area_entered" from="LeftExclusion" to="." method="_on_LeftPort_area_entered"]
+[connection signal="timeout" from="EnemyTimer" to="." method="_on_EnemyTimer_timeout"]

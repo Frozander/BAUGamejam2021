@@ -1,6 +1,7 @@
 extends Node2D
 
 const PERSON = preload("res://Assets/Prefabs/Person.tscn")
+const ENEMY_CAT = preload("res://Assets/Prefabs/EnemyCat.tscn")
 const Cooldown = preload("res://Assets/Scripts/Cooldown.gd")
 
 const ZONE_X = 210 #width of move zone
@@ -13,6 +14,7 @@ const PART_CHANGE_X_GAP = 70
 
 var rng = RandomNumberGenerator.new()
 var people = []
+var enemy_cat = null
 var current_part = 1
 var meow_cooldown:Cooldown = Global.ability_cooldown_map["meow"]
 
@@ -29,7 +31,8 @@ func _ready():
 
 func _physics_process(_delta):
 	# sort_children($MoveZone)
-	pass
+	if get_node_or_null("MoveZone/EnemyCat"):
+		stop_enemy_return_timer()
 
 func _unhandled_key_input(event):
 	if Input.is_action_pressed("meow") and meow_cooldown.is_ready():
@@ -49,11 +52,17 @@ func change_part(part):
 	if part != current_part:
 		for p in len(people[current_part]):
 			$MoveZone.remove_child(people[current_part][p])
+		$MoveZone.remove_child(enemy_cat)
+		start_enemy_return_timer()
 		
 	current_part = part
 	
+	if current_part == enemy_cat.current_part:
+		$MoveZone.add_child(enemy_cat)
+	
 	for p in len(people[current_part]):
 		$MoveZone.add_child(people[current_part][p])
+	
 		
 	$Backgound.texture = BACKGROUNDS[current_part]
 
@@ -109,17 +118,26 @@ func _on_HUD_timeout():
 
 func reset():
 	init_people()
+	init_enemy_cat()
 	current_part = 1
 	change_part(1)
+	move_enemy_cat_to_part(1)
 	
 func init_people():
 	people = []
+	randomize()
+	var photographer_index = randi() % (3 * PERSON_COUNT)
+	print(photographer_index)
 	for i in 3:
 		people.append([])
 		for p in PERSON_COUNT:
+			var is_photo = (i * PERSON_COUNT) + p == photographer_index
 			var person = PERSON.instance()
 			person.current_index = p
 			person.part_index = i
+			if is_photo:
+				person.make_photographer()
+#			person.current_index = p
 			var rand = random_positon_in_move_zone();
 			person.position.x += rand[0]
 			person.position.y += rand[1]
@@ -151,8 +169,35 @@ func move_person_to_another_part(person,part):
 	else:
 		person.position.x = ZONE_X - 20
 
+func init_enemy_cat():
+	enemy_cat = ENEMY_CAT.instance()
+	var random_pos = random_positon_in_move_zone()
+	enemy_cat.position = Vector2(random_pos[0], random_pos[1])
+
+func move_enemy_cat_to_part(part):
+	var direction = enemy_cat.current_part - part
+	if direction > 0:
+		enemy_cat.position.x = ZONE_X
+	elif direction < 0:
+		enemy_cat.position.x = -ZONE_X
+	
+	enemy_cat.current_part = part
+	
+	$MoveZone.add_child(enemy_cat)
+
+func start_enemy_return_timer():
+	$EnemyTimer.wait_time = rand_range(5, 10) # 5 and 10 are placeholders
+	$EnemyTimer.start()
+
+func stop_enemy_return_timer():
+	$EnemyTimer.stop()
+
 func sort_children(node):
 	var children = node.get_children()
 	for child in children:
 		if child is Area2D:
 			child.z_index = child.get_node("CollisionShape2D").global_position.y
+
+
+func _on_EnemyTimer_timeout():
+	move_enemy_cat_to_part(current_part)
