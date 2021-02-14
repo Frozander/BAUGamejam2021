@@ -4,6 +4,7 @@ const Cooldown = preload("res://Assets/Scripts/Cooldown.gd")
 
 const DEFAULT_DAY_LENGTH_IN_SECONDS = 12
 var current_day = 0
+const LAST_DAY = 5
 
 var pet_meter_step = 10.0
 var pet_meter_current_value = 0.0

@@ -6,6 +6,9 @@ func _ready():
 	set_progress_percentage(p)
 	if p == 100:
 		set_polaroid()
+	if Global.current_day == Global.LAST_DAY:
+		$Control/NextDayButton.hide()
+		move_main_menu_button_to_center()
 
 func set_progress_percentage(score):
 	if score <= 1:
@@ -40,3 +43,7 @@ func resize_progress_to_normal_with():
 	$Control/ProgressBar.anchor_right = .4
 	$Control/ProgressBar.margin_right = 30
 
+func move_main_menu_button_to_center():
+	$Control/MainMenuButton.margin_left = 120
+	$Control/MainMenuButton.margin_right = 220
+	
