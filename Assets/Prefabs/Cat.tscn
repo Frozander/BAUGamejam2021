@@ -32,7 +32,8 @@ material = SubResource( 1 )
 position = Vector2( 0, 1 )
 scale = Vector2( 1.5, 1.5 )
 frames = ExtResource( 1 )
-animation = "sit"
+animation = "pose"
+frame = 1
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -77,4 +78,5 @@ margin_top = -19.0
 margin_right = 11.0
 margin_bottom = -16.0
 [connection signal="area_entered" from="." to="." method="_on_Cat_area_entered"]
+[connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
 [connection signal="finished" from="AudioStreamPlayer" to="." method="_on_AudioStreamPlayer_finished"]
