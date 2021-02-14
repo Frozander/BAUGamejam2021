@@ -54,6 +54,8 @@ func _process(delta):
 		self.z_index = $PersonBody.global_position.y + 50
 		$Label.text = String(self.z_index)
 		
+		calc_coliders()
+		
 		if not self.cat:
 			return
 
@@ -66,9 +68,20 @@ func _process(delta):
 				wait_for_cat()
 			else:
 				go_to_cat()
+				
+		calc_coliders()
 		
 		
 		
+func calc_coliders():
+	if is_waiting_cat or is_petting_cat:
+		$PersonBody.position.x = -10
+		$BodyShape.position.x = -10
+		$PersonPetZone.show()
+	else:
+		$PersonBody.position.x = 0
+		$BodyShape.position.x = 0
+		$PersonPetZone.hide()		
 		
 func calc_move():
 	direction = rand_dir()
