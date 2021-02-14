@@ -214,3 +214,25 @@ func sort_children(node):
 
 func _on_EnemyTimer_timeout():
 	move_enemy_cat_to_part(current_part)
+	
+func _on_PersonTimer_timeout():
+	if len(people[current_part]) <= 2:
+		get_one_person_from_another_part()
+
+func get_one_person_from_another_part():
+	print("adding person from another part")
+	var other_part = (current_part + 1) % 3
+	if len(people[other_part]) == 0:
+		other_part = (current_part + 2) % 3
+	var per = people[other_part].pop_back()
+	#sağdan geldi
+	if other_part > current_part:
+		per.position.x = +ZONE_X
+		per.direction = -1
+	#soldan geldi 
+	else:
+		per.position.x = -ZONE_X
+		per.direction = 1
+	per.is_walking = true
+	people[current_part].append(per)
+	$MoveZone.add_child(per)	
