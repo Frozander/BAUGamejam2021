@@ -39,16 +39,14 @@ func _physics_process(_delta):
 	if Input.is_action_just_pressed("pose"):
 		if Global.ability_cooldown_map["pose"].is_ready():
 			$MoveZone/Cat.on_pose()
-			for p in len(people[current_part]):
-				if photographer == people[current_part][p]:
-					if photographer.is_taking_photo and Global.pet_meter_current_value == Global.pet_meter_max_value:
-						Global.take_photo_and_finish_day()
-#						var photo_look_right = photographer.direction == 1
-#						var cat_look_right = $MoveZone/Cat/AnimatedSprite.flip_h == true
-#						var cat_at_right = photographer.position.x < $MoveZone/Cat.position.x
-#						if (cat_at_right && photo_look_right and !cat_look_right) or (!cat_at_right and !photo_look_right and cat_look_right):
-#							Global.take_photo_and_finish_day()
-			
+			if is_photographer_facing_cat() and is_photographer_ready_to_take_photograph():
+				Global.take_photo_and_finish_day()
+
+func is_photographer_facing_cat():
+	var is_cat_at_right =($MoveZone/Cat.position - photographer.position).x > 0
+	return (is_cat_at_right and photographer.direction == 1) or (not is_cat_at_right and photographer.direction != 1) 
+func is_photographer_ready_to_take_photograph():
+	return people[current_part].has(photographer) and photographer.is_taking_photo and Global.pet_meter_current_value >= Global.pet_meter_max_value
 
 func _unhandled_key_input(event):
 	if Input.is_action_pressed("meow") and meow_cooldown.is_ready():
@@ -84,6 +82,8 @@ func change_part(part):
 
 func on_cat_meow():
 	var closest_person = find_closest_person_to_cat()
+	if not closest_person:
+		return
 	var dist = dist_between_cat_and_person(closest_person)
 	if dist < PERSON_HEARING_MEOW_LOWER_LIMIT:
 		closest_person.on_hear_meow($MoveZone/Cat)
@@ -238,7 +238,6 @@ func _on_PersonTimer_timeout():
 		get_one_person_from_another_part()
 
 func get_one_person_from_another_part():
-	print("adding person from another part")
 	var other_part = (current_part + 1) % 3
 	if len(people[other_part]) == 0:
 		other_part = (current_part + 2) % 3
