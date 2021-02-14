@@ -180,14 +180,17 @@ func pet_cat():
 	is_petting_cat = true
 	is_waiting_cat = false
 	self.cat.start_petting()
+	Global.petting_person = self
 	$AnimatedSprite.play("pet")
 
-func end_petting():
+func end_petting(with_attack = false):
 	is_petting_cat = false
 	is_petted_cat = true
 	is_waiting_cat = false
 	is_going_to_cat = false
-	Global.pet_meter_current_value += delta_count
+	Global.petting_person = null
+	if !with_attack:
+		Global.pet_meter_current_value += delta_count
 	calc_move()
 	delta_count = 0
 	self.cat.finish_petting()

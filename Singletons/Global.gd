@@ -7,10 +7,13 @@ const LAST_DAY = 5
 var current_day = 1
 
 #var pet_meter_step = 10.0
+var pet_attack_penalty = 5
 var pet_meter_current_value = 0.0
 var pet_meter_max_value = 50.0
 
 var is_last_day_photo_taken = false
+
+var petting_person = null
 
 var ability_cooldown_map = {
 	"meow": Cooldown.new(3.0),

@@ -29,7 +29,6 @@ material = SubResource( 2 )
 scale = Vector2( 1.5, 1.5 )
 frames = ExtResource( 1 )
 animation = "idle"
-frame = 2
 playing = true
 __meta__ = {
 "_edit_lock_": true

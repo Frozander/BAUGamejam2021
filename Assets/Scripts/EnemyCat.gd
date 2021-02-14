@@ -49,7 +49,11 @@ func _physics_process(delta):
 				if collide_with_person(target):
 					print("hit player")
 					get_attack()
-					target.hit()
+					
+					if Global.petting_person != null:
+						Global.petting_person.end_petting()
+					else:
+						target.hit()
 					current_state = enemyState.Patrol
 				
 	
