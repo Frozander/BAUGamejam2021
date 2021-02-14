@@ -172,8 +172,10 @@ func listen_people_hit_wall():
 
 func on_person_hit_wall(person):
 	if person.is_last_hitted_wall_right and person.part_index == 2:
+		person.calc_move()
 		return
 	if not person.is_last_hitted_wall_right and person.part_index == 0:
+		person.calc_move()
 		return
 	if person.is_last_hitted_wall_right:
 		move_person_to_another_part(person,person.part_index+1)
