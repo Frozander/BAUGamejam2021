@@ -112,5 +112,15 @@ shape = SubResource( 17 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PersonBody"]
 position = Vector2( -0.66819, 53.4539 )
 shape = SubResource( 18 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = -16.764
+margin_top = -67.8201
+margin_right = 21.236
+margin_bottom = -53.8201
+text = "sad"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="area_entered" from="." to="." method="_on_Person_area_entered"]
 [connection signal="area_entered" from="PersonPetZone" to="." method="_on_PetZone_area_entered"]

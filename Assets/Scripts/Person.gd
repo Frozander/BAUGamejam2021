@@ -50,6 +50,12 @@ func _process(delta):
 			self.position += movement			
 			self.scale = Vector2(direction, 1)
 
+		#50 needen becouse person's center not real center look 2d :/
+		self.z_index = $PersonBody.global_position.y + 50
+		$Label.text = String(self.z_index)
+		
+		calc_coliders()
+		
 		if not self.cat:
 			return
 
@@ -62,12 +68,23 @@ func _process(delta):
 				wait_for_cat()
 			else:
 				go_to_cat()
+				
+		calc_coliders()
 		
-		self.z_index = $PersonBody.global_position.y
 		
 	if Input.is_action_just_pressed("leave"):
 		end_petting()
 
+func calc_coliders():
+	if is_waiting_cat or is_petting_cat:
+		$PersonBody.position.x = -10
+		$BodyShape.position.x = -10
+		$PersonPetZone.show()
+	else:
+		$PersonBody.position.x = 0
+		$BodyShape.position.x = 0
+		$PersonPetZone.hide()		
+		
 func calc_move():
 	direction = rand_dir()
 	delta_count = 0

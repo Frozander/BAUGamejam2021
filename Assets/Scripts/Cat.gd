@@ -76,7 +76,8 @@ func _physics_process(_delta):
 			$Particles2D.set_texture(broken_heart)
 	
 	self.position += mov
-	self.z_index = $CollisionShape2D.position.y
+	self.z_index = $CatBody.global_position.y 
+	$Label.text = String(self.z_index)
 
 func play_audio(stream = meow):
 	if !is_playing_audio:
