@@ -10,6 +10,7 @@ var movement_vector = Vector2(0, 0)
 var is_playing_audio = false
 var delta_count = 0
 var target = null
+var current_part = 1
 
 var current_state = enemyState.Patrol
 var particle_state = particleState.Happy
