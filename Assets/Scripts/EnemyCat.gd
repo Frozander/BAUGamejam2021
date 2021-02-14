@@ -61,7 +61,7 @@ func _physics_process(delta):
 	# Exclusion Zone Collision
 	var areas = get_overlapping_areas()
 	for area in areas:
-			if "Person" in area.name or "Cat" == area.name:
+			if "Cat" == area.name:
 				collide_with_person(area)
 			else:
 				exclusion_check(area)
@@ -84,6 +84,7 @@ func _physics_process(delta):
 		particleState.Attack:
 			$Particles2D.set_texture(broken_heart)
 	
+	self.z_index = $CollisionShape2D.global_position.y
 	self.position += mov
 
 func play_audio(stream = meow):

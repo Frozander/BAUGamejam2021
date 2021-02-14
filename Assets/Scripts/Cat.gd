@@ -18,6 +18,7 @@ var angry = preload("res://Assets/Sounds/angry.wav")
 
 var last_played_audio
 var is_petting = false
+var is_posing
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -25,7 +26,7 @@ func _ready():
 
 func _physics_process(_delta):
 	movement_vector = Vector2(0, 0)
-	if is_petting == false:
+	if !is_petting and !is_posing:
 		if Input.is_action_pressed("ui_up"): movement_vector += Vector2.UP
 		if Input.is_action_pressed("ui_down"): movement_vector += Vector2.DOWN
 		if Input.is_action_pressed("ui_left"): movement_vector += Vector2.LEFT
@@ -35,6 +36,8 @@ func _physics_process(_delta):
 		on_meow()
 	elif Input.is_action_just_pressed("leave"):
 		on_leave()
+	elif Input.is_action_just_pressed("pose"):
+		on_pose()
 		
 	if movement_vector.x < 0:
 		$AnimatedSprite.flip_h = false
@@ -48,7 +51,7 @@ func _physics_process(_delta):
 	# Exclusion Zone Collision
 	var areas = get_overlapping_areas()
 	for area in areas:
-		if "Person" in area.name or "Enemy" in area.name:
+		if "PersonBody" in area.name or "Enemy" in area.name:
 			collide_with_person(area)
 		else:
 			exclusion_check(area)
@@ -61,6 +64,8 @@ func _physics_process(_delta):
 			current_state = particleState.Happy
 			$Particles2D.emitting = true
 			$AnimatedSprite.play('sit')
+		elif is_posing:
+			$AnimatedSprite.play('pose')
 		else:
 			$AnimatedSprite.play('idle')
 	elif Input.is_action_pressed("ui_run"):
@@ -76,7 +81,7 @@ func _physics_process(_delta):
 			$Particles2D.set_texture(broken_heart)
 	
 	self.position += mov
-	self.z_index = $CatBody.global_position.y
+	self.z_index = $CatBody/CollisionShape2D.global_position.y
 
 func play_audio(stream = meow):
 	if !is_playing_audio:
@@ -109,6 +114,10 @@ func on_leave():
 		$AudioStreamPlayer.stop()
 		finish_petting()
 
+func on_pose():
+	if Global.ability_cooldown_map["pose"].is_ready():
+		is_posing = true
+
 func update_petting_percentage(per):
 	$ProgressBar.value = per
 
@@ -117,14 +126,18 @@ func hit():
 	finish_petting()
 
 func collide_with_person(person_area):
-	if global_position.x < person_area.global_position.x:
-		movement_vector.x = 0 if movement_vector.x > 0 else movement_vector.x
-	if global_position.x > person_area.global_position.x:
-		movement_vector.x = 0 if movement_vector.x < 0 else movement_vector.x
-	if global_position.y < person_area.global_position.y:
-		movement_vector.y = 0 if movement_vector.y > 0 else movement_vector.y
-	if global_position.y > person_area.global_position.y:
-		movement_vector.y = 0 if movement_vector.y < 0 else movement_vector.y
+	var collision = false
+	if overlaps_area(person_area):
+		collision = true
+		if global_position.x < person_area.global_position.x:
+			movement_vector.x = 0 if movement_vector.x > 0 else movement_vector.x
+		if global_position.x > person_area.global_position.x:
+			movement_vector.x = 0 if movement_vector.x < 0 else movement_vector.x
+		if global_position.y < person_area.global_position.y:
+			movement_vector.y = 0 if movement_vector.y > 0 else movement_vector.y
+		if global_position.y > person_area.global_position.y:
+			movement_vector.y = 0 if movement_vector.y < 0 else movement_vector.y
+	return collision
 
 func exclusion_check(area):
 	match area.name:
@@ -145,3 +158,8 @@ func _on_AudioStreamPlayer_finished():
 
 func _on_Cat_area_entered(area):
 	pass
+
+
+func _on_AnimatedSprite_animation_finished():
+	if $AnimatedSprite.animation == 'pose':
+		is_posing = false

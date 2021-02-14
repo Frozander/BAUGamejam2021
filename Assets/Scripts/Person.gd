@@ -75,7 +75,7 @@ func _process(delta):
 			self.scale = Vector2(direction, 1)
 
 		#50 needen becouse person's center not real center look 2d :/
-		self.z_index = $PersonBody.global_position.y + 50
+		self.z_index = $PersonBody.global_position.y
 		
 		calc_coliders()
 		
