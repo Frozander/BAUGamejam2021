@@ -125,11 +125,17 @@ func reset():
 	
 func init_people():
 	people = []
+	randomize()
+	var photographer_index = randi() % (3 * PERSON_COUNT)
+	print(photographer_index)
 	for i in 3:
 		people.append([])
 		for p in PERSON_COUNT:
+			var is_photo = (i * PERSON_COUNT) + p == photographer_index
 			var person = PERSON.instance()
-			person.current_index = p
+			if is_photo:
+				person.make_photographer()
+#			person.current_index = p
 			var rand = random_positon_in_move_zone();
 			person.position.x += rand[0]
 			person.position.y += rand[1]
