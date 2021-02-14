@@ -1,11 +1,5 @@
 extends Control
 
-func _on_MainMenuButton_pressed():
-	get_tree().change_scene("res://Scenes/TitleScreen.tscn")
-
-func _on_ContinueButton_pressed():
-	get_tree().change_scene("res://Scenes/SceneOne.tscn")
-
 func _ready():
 	var p = 100*(Global.pet_meter_current_value/Global.pet_meter_max_value)
 	p = min(p,100)

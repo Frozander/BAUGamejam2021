@@ -3,7 +3,7 @@ extends Node
 const Cooldown = preload("res://Assets/Scripts/Cooldown.gd")
 
 const DEFAULT_DAY_LENGTH_IN_SECONDS = 12
-var current_day = 1
+var current_day = 0
 
 var pet_meter_step = 10.0
 var pet_meter_current_value = 0.0
@@ -28,7 +28,11 @@ var taken_image_keys = []
 func get_current_day_image():
 	return DAY_IMAGE_MAP[current_day]
 
-func finish_day():
+func take_photo_and_finish_day():
+	pet_meter_current_value = pet_meter_max_value
+	get_tree().change_scene("res://Scenes/FadeIn.tscn")
+
+func go_to_next_day():
 	if is_image_taken():
 		taken_image_keys.append(current_day)
 	reset_cooldowns()
