@@ -76,7 +76,7 @@ func _process(delta):
 			self.scale = Vector2(direction, 1)
 
 		#50 needen becouse person's center not real center look 2d :/
-		self.z_index = $PersonBody.global_position.y + 50
+		self.z_index = $PersonBody.global_position.y
 		
 		calc_coliders()
 		
@@ -155,6 +155,8 @@ func on_hear_meow(cat):
 		face_to_cat()
 	
 func go_to_cat():
+	if is_photographer:
+		return
 	is_going_to_cat = true
 	if is_waiting_cat:
 		is_going_to_cat = false
@@ -164,6 +166,8 @@ func go_to_cat():
 	position += movement
 
 func wait_for_cat():
+	if is_photographer:
+		return
 	if is_petting_cat == false:
 		is_waiting_cat = true
 		is_walking = false

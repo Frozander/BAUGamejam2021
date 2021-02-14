@@ -34,9 +34,12 @@ position = Vector2( 23.1193, 31.8673 )
 shape = SubResource( 2 )
 
 [node name="PersonBody" type="Area2D" parent="."]
+position = Vector2( -1.99999, 60.9178 )
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PersonBody"]
 position = Vector2( -0.66819, 53.4539 )
+position = Vector2( 0, -7 )
 shape = SubResource( 3 )
 [connection signal="area_entered" from="." to="." method="_on_Person_area_entered"]
 [connection signal="area_entered" from="PersonPetZone" to="." method="_on_PetZone_area_entered"]
