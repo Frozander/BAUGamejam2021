@@ -39,7 +39,7 @@ func _physics_process(_delta):
 	if Input.is_action_just_pressed("pose"):
 		if Global.ability_cooldown_map["pose"].is_ready():
 			$MoveZone/Cat.on_pose()
-			if is_photographer_facing_cat() and is_photographer_ready_to_take_photograph():
+			if is_photographer_ready_to_take_photograph():
 				Global.take_photo_and_finish_day()
 
 func is_photographer_facing_cat():
