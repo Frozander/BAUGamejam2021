@@ -1,6 +1,13 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Assets/Prefabs/HUD.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Fonts/IndieFlower-Regular.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 12
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 2 )
 
 [node name="HowToPlay" type="Control"]
 anchor_right = 1.0
@@ -11,3 +18,39 @@ __meta__ = {
 
 [node name="HUD" parent="." instance=ExtResource( 1 )]
 position = Vector2( 0, 0 )
+
+[node name="AbilityLabel" type="Label" parent="."]
+anchor_top = 0.00294622
+anchor_bottom = 0.00294622
+margin_top = 36.2929
+margin_right = 208.0
+margin_bottom = 222.293
+custom_fonts/font = SubResource( 1 )
+text = "Those are your abilities
+1 is \"meow\", you can meow to attract someone's attention, if they are close enough they will pet you.
+2 is \"pose\", you can pose when a photographer is facing you and taking a photo
+3 is \"leave\", you can cancel early while someone is petting you"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HUDLabel" type="Label" parent="."]
+anchor_top = 0.00294622
+anchor_bottom = 0.00294622
+margin_left = 210.718
+margin_top = 34.8787
+margin_right = 418.718
+margin_bottom = 241.879
+custom_fonts/font = SubResource( 1 )
+text = "You can see how much time left before current day is finished.
+And there is your pet meter. each time someone pets you, your pet score will go up to a certain value. 
+When you reach that value, you can pose for a photographer to be the legend of Hagia Sophia but be carefull other cats won't like it when you take all the love."
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
