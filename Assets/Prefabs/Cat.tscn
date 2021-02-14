@@ -7,18 +7,18 @@
 [ext_resource path="res://Assets/Sounds/meow.wav" type="AudioStream" id=5]
 [ext_resource path="res://Assets/Shaders/cat_shader.shader" type="Shader" id=6]
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 6 )
 shader_param/offset = Vector2( 0, 1 )
 shader_param/modulate = null
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 5.69855, 2.87295 )
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 12.2806, 2.53652 )
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 11.9652, 2.11607 )
 
 [node name="Cat" type="Area2D"]
@@ -27,7 +27,7 @@ collision_mask = 3
 script = ExtResource( 4 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-material = SubResource( 2 )
+material = SubResource( 1 )
 position = Vector2( 0, 1 )
 scale = Vector2( 1.5, 1.5 )
 frames = ExtResource( 1 )
@@ -57,16 +57,16 @@ volume_db = -5.361
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CatPetZone"]
 position = Vector2( -4.98032, 1.38755 )
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="CatBody" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CatBody"]
 position = Vector2( 0.105114, 10.6163 )
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.210224, 10.6163 )
-shape = SubResource( 5 )
+shape = SubResource( 4 )
 [connection signal="area_entered" from="." to="." method="_on_Cat_area_entered"]
 [connection signal="finished" from="AudioStreamPlayer" to="." method="_on_AudioStreamPlayer_finished"]
