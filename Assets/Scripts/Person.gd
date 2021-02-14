@@ -147,12 +147,14 @@ func idle():
 	is_walking = false
 
 func on_hear_meow(cat):
-	if not is_petted_cat:
+	if not is_petted_cat and not is_photographer:
 		is_going_to_cat = true
 		self.cat = cat
 		face_to_cat()
 	
 func go_to_cat():
+	if is_photographer:
+		return
 	is_going_to_cat = true
 	if is_waiting_cat:
 		is_going_to_cat = false
@@ -162,6 +164,8 @@ func go_to_cat():
 	position += movement
 
 func wait_for_cat():
+	if is_photographer:
+		return
 	if is_petting_cat == false:
 		is_waiting_cat = true
 		is_walking = false

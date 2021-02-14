@@ -2,9 +2,9 @@ extends Node
 
 const Cooldown = preload("res://Assets/Scripts/Cooldown.gd")
 
-const DEFAULT_DAY_LENGTH_IN_SECONDS = 120
+const DEFAULT_DAY_LENGTH_IN_SECONDS = 10
 const LAST_DAY = 5
-var current_day = 0
+var current_day = 1
 
 var pet_meter_step = 10.0
 var pet_meter_current_value = 0.0
@@ -29,7 +29,7 @@ var taken_image_keys = []
 func start_game():
 	reset_pet_meter_values()
 	if current_day == LAST_DAY:
-		current_day = 0
+		current_day = 1
 	go_to_next_day()
 
 func get_current_day_image():

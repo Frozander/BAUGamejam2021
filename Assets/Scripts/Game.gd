@@ -102,6 +102,8 @@ func find_closest_person_to_cat():
 	var closest_person_to_cat = people[current_part][0]
 	var min_dist = dist_between_cat_and_person(closest_person_to_cat)
 	for person in people[current_part]:
+		if person.is_photographer:
+			continue
 		var dist = dist_between_cat_and_person(person)
 		if dist < min_dist:
 			closest_person_to_cat = person
@@ -150,9 +152,9 @@ func listen_people_hit_wall():
 			p.connect("hit_wall",self, "on_person_hit_wall")
 
 func on_person_hit_wall(person):
-	if person.is_last_hitted_wall_right == true and person.part_index == 2:
+	if person.is_last_hitted_wall_right and person.part_index == 2:
 		return
-	if not person.is_last_hitted_wall_right == true and person.part_index == 0:
+	if not person.is_last_hitted_wall_right and person.part_index == 0:
 		return
 	if person.is_last_hitted_wall_right:
 		move_person_to_another_part(person,person.part_index+1)
@@ -167,7 +169,7 @@ func move_person_to_another_part(person,part):
 	if person.is_last_hitted_wall_right:
 		person.position.x = 0
 	else:
-		person.position.x = ZONE_X - 20
+		person.position.x = 2*ZONE_X
 
 func init_enemy_cat():
 	enemy_cat = ENEMY_CAT.instance()
