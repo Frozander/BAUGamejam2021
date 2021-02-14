@@ -68,7 +68,6 @@ func _process(delta):
 
 		#50 needen becouse person's center not real center look 2d :/
 		self.z_index = $PersonBody.global_position.y + 50
-		$Label.text = String(self.z_index)
 		
 		calc_coliders()
 		
