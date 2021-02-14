@@ -2,7 +2,7 @@ extends Node
 
 const Cooldown = preload("res://Assets/Scripts/Cooldown.gd")
 
-const DEFAULT_DAY_LENGTH_IN_SECONDS = 10
+const DEFAULT_DAY_LENGTH_IN_SECONDS = 90
 const LAST_DAY = 5
 var current_day = 1
 
