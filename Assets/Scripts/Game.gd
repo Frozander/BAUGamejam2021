@@ -28,8 +28,9 @@ func _ready():
 	reset()
 
 func _physics_process(_delta):
-	sort_children($MoveZone)
-	
+	# sort_children($MoveZone)
+	pass
+
 func _unhandled_key_input(event):
 	if Input.is_action_pressed("meow") and meow_cooldown.is_ready():
 		on_cat_meow()
