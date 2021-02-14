@@ -27,6 +27,9 @@ func _ready():
 	rng.randomize()
 	reset()
 
+func _physics_process(_delta):
+	sort_children($MoveZone)
+	
 func _unhandled_key_input(event):
 	if Input.is_action_pressed("meow") and meow_cooldown.is_ready():
 		on_cat_meow()
@@ -120,3 +123,8 @@ func init_people():
 			person.position.y += rand[1]
 			people[i].append(person)
 
+func sort_children(node):
+	var children = node.get_children()
+	for child in children:
+		if child is Area2D:
+			child.z_index = child.get_node("CollisionShape2D").global_position.y

@@ -65,7 +65,6 @@ func _physics_process(delta):
 		$AnimatedSprite.play('walk')
 	
 	self.position += mov
-	self.z_index = $CollisionShape2D.position.y
 
 func play_audio(stream = meow):
 	if !is_playing_audio:
@@ -84,7 +83,7 @@ func get_angry():
 	play_audio(angry)
 
 func random_vector2():
-	return Vector2(noise.get_noise_1d(global_position.x), noise.get_noise_1d(global_position.y))
+	return Vector2(rand_range(-1, 1), rand_range(-1, 1))
 
 func collide_with_person(person_area):
 	if global_position.x < person_area.global_position.x:
