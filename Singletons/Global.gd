@@ -9,7 +9,7 @@ var current_day = 1
 
 var pet_attack_penalty = 1
 var pet_meter_current_value = 0.0
-var pet_meter_max_value = 20.0
+var pet_meter_max_value = 13.0
 
 var is_last_day_photo_taken = false
 
@@ -48,7 +48,7 @@ func take_photo_and_finish_day():
 
 func finish_day():
 	is_last_day_photo_taken = false
-	get_tree().change_scene("res://Scenes/FadeOut.tscn")
+	get_tree().change_scene("res://Scenes/FadeIn.tscn")
 	
 func go_to_next_day():
 	reset_cooldowns()
