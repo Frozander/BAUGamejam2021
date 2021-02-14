@@ -41,11 +41,11 @@ func take_photo_and_finish_day():
 	is_last_day_photo_taken = true
 	if not taken_image_keys.has(current_day):
 		taken_image_keys.append(current_day)
-	get_tree().change_scene("res://Scenes/FadeIn.tscn")
+	get_tree().change_scene("res://Scenes/FadeOut.tscn")
 
 func finish_day():
 	is_last_day_photo_taken = false
-	get_tree().change_scene("res://Scenes/FadeIn.tscn")
+	get_tree().change_scene("res://Scenes/FadeOut.tscn")
 	
 func go_to_next_day():
 	reset_cooldowns()
