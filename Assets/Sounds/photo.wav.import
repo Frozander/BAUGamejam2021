@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/photo.wav-97e36ce2b66cb074e3f9285c05e9c9fc.sample"
+
+[deps]
+
+source_file="res://Assets/Sounds/photo.wav"
+dest_files=[ "res://.import/photo.wav-97e36ce2b66cb074e3f9285c05e9c9fc.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
