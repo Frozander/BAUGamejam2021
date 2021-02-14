@@ -45,8 +45,7 @@ func _physics_process(_delta):
 		on_meow()
 	elif Input.is_action_just_pressed("leave"):
 		on_leave()
-	elif Input.is_action_just_pressed("pose"):
-		on_pose()
+	
 		
 	if movement_vector.x < 0:
 		$AnimatedSprite.flip_h = false
@@ -123,11 +122,10 @@ func on_leave():
 		$AudioStreamPlayer.stop()
 		finish_petting()
 func on_pose():
-	if Global.ability_cooldown_map["pose"].is_ready():
-		is_posing = true
-		delta_count = 0
-		movement_vector = Vector2(0,0)
-		$AudioStreamPlayer.stop()
+	is_posing = true
+	delta_count = 0
+	movement_vector = Vector2(0,0)
+	$AudioStreamPlayer.stop()
 
 func update_petting_percentage(per):
 	$ProgressBar.value = per

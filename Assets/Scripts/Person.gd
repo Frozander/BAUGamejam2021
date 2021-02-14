@@ -99,6 +99,7 @@ func _process(delta):
 	if Input.is_action_just_pressed("leave"):
 		end_petting()
 
+
 func calc_coliders():
 	if is_waiting_cat or is_petting_cat:
 		$PersonBody.position.x = -10
