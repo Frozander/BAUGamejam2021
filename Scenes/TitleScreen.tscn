@@ -21,6 +21,11 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+
+
+func _on_StartGameButton_pressed():
+	Global.start_game()
+	get_tree().change_scene(\"res://Scenes/Game.tscn\")
 "
 
 [sub_resource type="DynamicFont" id=2]
@@ -63,11 +68,10 @@ __meta__ = {
 
 [node name="StartGameButton" parent="." instance=ExtResource( 2 )]
 margin_left = 158.176
-margin_top = 93.2696
+margin_top = 93.8642
 margin_right = 263.176
-margin_bottom = 119.27
+margin_bottom = 119.865
 rect_pivot_offset = Vector2( 52.5, 13 )
-load_scene_on_click = true
 scene_to_load = "res://Scenes/Game.tscn"
 label = "Start Game"
 
@@ -90,3 +94,4 @@ rect_pivot_offset = Vector2( 52.5, 13 )
 load_scene_on_click = true
 scene_to_load = "res://Scenes/HowToPlay.tscn"
 label = "How To Play"
+[connection signal="pressed" from="StartGameButton" to="." method="_on_StartGameButton_pressed"]

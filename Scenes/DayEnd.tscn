@@ -112,3 +112,4 @@ scene_to_load = "res://Scenes/Game.tscn"
 label = "Next Day >"
 
 [node name="image" parent="Control" instance=ExtResource( 3 )]
+[connection signal="pressed" from="Control/NextDayButton" to="." method="_on_NextDayButton_pressed"]

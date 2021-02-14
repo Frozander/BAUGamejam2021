@@ -20,8 +20,6 @@ func _pressed():
 	if load_scene_on_click:
 		if scene_to_load:
 			get_tree().change_scene(scene_to_load)
-			Global.reset_cooldowns()
-			Global.reset_pet_meter_values()
 		else:
 			print(\"Load scene selected but not any scene given\")
 "
