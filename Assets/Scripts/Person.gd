@@ -1,5 +1,7 @@
 extends Area2D
 
+signal hit_wall
+
 const Cat = preload("res://Assets/Scripts/Cat.gd")
 const SPEED_Y_REF = [.25,0,0,0,-.25]
 const MAX_CAT_FOLLOWING_DISTANCE = 125
@@ -18,6 +20,8 @@ var is_waiting_cat = false
 var is_petting_cat = false
 var is_petted_cat = false
 var cat: Cat
+var part_index:int
+var is_last_hitted_wall_right: bool
 
 
 var sprites = [
@@ -25,7 +29,7 @@ var sprites = [
 	preload("res://Assets/AnimatedSprites/Person2.tres"),
 	preload("res://Assets/AnimatedSprites/Person3.tres"),	
 	preload("res://Assets/AnimatedSprites/Person5.tres"),	
-	]
+]
  
 var photographer_sprite = preload("res://Assets/AnimatedSprites/Person4.tres")
 
@@ -44,6 +48,7 @@ func _ready():
 	else:
 		$AnimatedSprite.frames = sprites[randi() % len(sprites)]
 	calc_move()
+		
 
 func _process(delta):	
 	delta_count += delta
@@ -103,17 +108,26 @@ func calc_coliders():
 		$BodyShape.position.x = 0
 		$PersonPetZone.hide()		
 		
+func make_photographer():
+	$AnimatedSprite.frames = photographer_sprite
+	is_photographer = true
+	calc_move()
+		
 func calc_move():
 	direction = rand_dir()
 	delta_count = 0
 	is_walking = rand_bool()
 	speed_x = .5
 	speed_y = SPEED_Y_REF[randi() % SPEED_Y_REF.size()]
+					
 	if is_walking:
 		idle()
 	else:
 		 walk()
 	
+	
+func take_photo():
+	$AnimatedSprite.play("photo")
 
 func rand_dir():
 	return pow(-1, randi() % 2);
@@ -126,16 +140,21 @@ func walk():
 	is_walking = true
 	
 func idle():
-	$AnimatedSprite.play("idle")
+	if is_photographer and (randi() % 3) < 2:
+		take_photo()
+	else:
+		$AnimatedSprite.play("idle")
 	is_walking = false
 
 func on_hear_meow(cat):
-	if not is_petted_cat:
+	if not is_petted_cat and not is_photographer:
 		is_going_to_cat = true
 		self.cat = cat
 		face_to_cat()
 	
 func go_to_cat():
+	if is_photographer:
+		return
 	is_going_to_cat = true
 	if is_waiting_cat:
 		is_going_to_cat = false
@@ -145,6 +164,8 @@ func go_to_cat():
 	position += movement
 
 func wait_for_cat():
+	if is_photographer:
+		return
 	if is_petting_cat == false:
 		is_waiting_cat = true
 		is_walking = false
@@ -192,15 +213,11 @@ func exclusion_check(area):
 				movement.y = 0
 				lastColidedArea = area
 		"LeftExclusion":
-			if movement.x < 0:
-				movement.x *= -1
-				direction *= -1
-				lastColidedArea = area
+			is_last_hitted_wall_right = false
+			emit_signal("hit_wall",self)
 		"RightExclusion":
-			if movement.x > 0:
-				movement.x *= -1
-				direction *= -1
-				lastColidedArea = area
+			is_last_hitted_wall_right = true
+			emit_signal("hit_wall",self)
 
 func collide_with_person(person_area):
 	if person_area != lastColidedArea:

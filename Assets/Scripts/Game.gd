@@ -102,6 +102,8 @@ func find_closest_person_to_cat():
 	var closest_person_to_cat = people[current_part][0]
 	var min_dist = dist_between_cat_and_person(closest_person_to_cat)
 	for person in people[current_part]:
+		if person.is_photographer:
+			continue
 		var dist = dist_between_cat_and_person(person)
 		if dist < min_dist:
 			closest_person_to_cat = person
@@ -125,15 +127,49 @@ func reset():
 	
 func init_people():
 	people = []
+	randomize()
+	var photographer_index = randi() % (3 * PERSON_COUNT)
+	print(photographer_index)
 	for i in 3:
 		people.append([])
 		for p in PERSON_COUNT:
+			var is_photo = (i * PERSON_COUNT) + p == photographer_index
 			var person = PERSON.instance()
 			person.current_index = p
+			person.part_index = i
+			if is_photo:
+				person.make_photographer()
+#			person.current_index = p
 			var rand = random_positon_in_move_zone();
 			person.position.x += rand[0]
 			person.position.y += rand[1]
 			people[i].append(person)
+	listen_people_hit_wall()
+	
+func listen_people_hit_wall():
+	for i in len(people):
+		for p in people[i]:
+			p.connect("hit_wall",self, "on_person_hit_wall")
+
+func on_person_hit_wall(person):
+	if person.is_last_hitted_wall_right and person.part_index == 2:
+		return
+	if not person.is_last_hitted_wall_right and person.part_index == 0:
+		return
+	if person.is_last_hitted_wall_right:
+		move_person_to_another_part(person,person.part_index+1)
+	else:
+		move_person_to_another_part(person,person.part_index-1)		
+		
+func move_person_to_another_part(person,new_part):
+	people[current_part].erase(person)
+	$MoveZone.remove_child(person)
+	person.part_index = new_part
+	people[new_part].append(person)
+	if person.is_last_hitted_wall_right:
+		person.position.x = -(ZONE_X - 30)
+	else:
+		person.position.x = +(ZONE_X - 30)
 
 func init_enemy_cat():
 	enemy_cat = ENEMY_CAT.instance()
